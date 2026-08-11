@@ -1,0 +1,60 @@
+Box Model and Typography : 
+
+Topic Introduction/Overview
+
+The CSS Box Model is the foundation of layout in CSS. Every HTML element is treated as a rectangular box with four parts: Content, Padding, Border and margin. Understanding the box model is essential because it controls how elements take up space, how they relate to each other, and how layouts are constructed.
+
+Typography in CSS deals with the styling of text—controlling font choices, sizes, weights, line heights, letterspacing, and more. Good typography improves readability, establishes visual hierarchy, and enhances the user experience. CSS provides extensive properties to control text presentation, from basic font-family to advanced features like variable fonts and OpenType features.
+
+
+Box Model Features:
+Content Area : Where text and images appear
+Padding : Space between content and border (transparent)
+Border: A line around the padding and content
+Margin: Space outside the border (transparent)
+Box-sizing: Controls how width/height is calculated (content-box vs border-box)
+Shorthand Properties:margin,padding,border(1-4 values)
+
+Typography Features:
+Font Properties:font-family,font-size,font-weight,font-style
+Text Properties:text-align,text-transform,text-decoration,text-shadow
+Line Properties:line-height,letter-spacing,word-spacing
+Web Fonts:@font-face and font-display
+Variable Fonts: Single file with multiple weights/styles
+Font Loading:font-display,preload strategies
+
+Advantages:
+Predictable spacing and layout calculations
+Responsive typography with clamp() and viewport units
+Accessibility through proper sizing and contrast
+Brand consistency through custom fonts
+Better readability with proper line height and spacing
+
+Typography Syntax:
+
+/* Font shorthand */
+.heading {
+  font: italic bold 24px / 1.5 'Helvetica', sans-serif;
+  /* font-style font-weight font-size/line-height font-family */
+}
+
+/* Web font with @font-face */
+@font-face {
+  font-family: 'CustomFont';
+  src: url('font.woff2') format('woff2');
+  font-display: swap;
+  font-weight: 100 900;
+  /* Variable font range */
+}
+
+/* Text styling */
+.text {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+  word-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: underline wavy red;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+===================================================================================================
