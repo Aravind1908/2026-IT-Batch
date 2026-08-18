@@ -1,0 +1,24 @@
+HTML : 
+
+1.Explain how semantic HTML elements help improve the Search Engine Optimization (SEO) of a webpage.
+2.Explain how the <meta name="description"> and <title> tags contribute to improving the Search Engine Optimization (SEO) of a webpage.
+3.Identify how the alt attribute of the <img> tag contributes to SEO and accessibility.
+4.Explain the main purpose of using the <section> and <article> semantic elements in HTML5.
+5.Define the purpose of the <header> and <footer> semantic tags in HTML5.
+6.Explain the purpose and basic syntax of the aria-label attribute in HTML
+7.Define the purpose of the required attribute in the <input> tag and provide its basic syntax.
+8.Explain the use of the placeholder and value attributes in the <input> tag with their basic syntax.
+9.Explain how the HTML5 <picture> element differs from the <img> tag when displaying responsive images.
+10.Explain how the Elements panel in Developer Tools is used to inspect and modify HTML and CSS.
+11.Identify the purpose of the Console panel in Developer Tools when developing a webpage.
+12.Describe how the Network panel helps in analyzing the resources loaded by a webpage.
+
+CSS : 
+
+1.Explain how content-box and border-box differ in calculating the width and height of an element in the CSS Box Model.
+2.Describe the role of grid-column and grid-row properties in positioning header and footer elements
+3.Describe how CSS Grid properties can be used to position a header and footer within a webpage layout.
+4.Describe how the justify-content property controls the alignment of flex items along the main axis.
+5.Explain the use of the flex-direction property in arranging flex items.
+6.Design a webpage layout for an online shopping website using CSS Grid to arrange the header, navigation bar, product section, and footer.
+7.Develop a responsive webpage for a college website using CSS Grid to organize the header, sidebar, main content, and footer.
