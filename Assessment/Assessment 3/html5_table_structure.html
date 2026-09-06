@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A detailed, beginner-friendly guide to the structure of an HTML5 table — thead, tbody, tfoot, caption, colspan, and rowspan.">
+  <meta name="author" content="Arena.ai Agent">
+  <meta name="keywords" content="HTML5 table, thead, tbody, tfoot, caption, colspan, rowspan, table structure">
+  <title>Structure of an HTML5 Table</title>
+  <style>
+    :root {
+      --ink: #1f2430;
+      --muted: #5b6270;
+      --accent: #ea580c;
+      --accent-soft: #fdecdd;
+      --code-bg: #0f172a;
+      --code-ink: #e2e8f0;
+      --border: #e3e7ee;
+      --card: #ffffff;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color: var(--ink); background: #f6f8fb; line-height: 1.7; }
+    .wrap { max-width: 860px; margin: 0 auto; padding: 32px 20px 80px; }
+    header.hero { background: linear-gradient(135deg, #ea580c, #c2410c); color: #fff; border-radius: 16px; padding: 36px 28px; margin-bottom: 28px; }
+    header.hero h1 { margin: 0 0 8px; font-size: 1.9rem; }
+    header.hero p { margin: 0; opacity: 0.92; }
+    .badge { display: inline-block; background: rgba(255,255,255,0.18); border-radius: 999px; padding: 3px 12px; font-size: 0.8rem; margin-top: 14px; letter-spacing: 0.4px; }
+    h2 { font-size: 1.4rem; color: #c2410c; border-bottom: 2px solid var(--accent-soft); padding-bottom: 6px; margin-top: 42px; }
+    h2 .num { display: inline-block; width: 28px; height: 28px; line-height: 28px; text-align: center; background: var(--accent); color: #fff; border-radius: 50%; font-size: 0.9rem; margin-right: 10px; }
+    h3 { color: var(--ink); margin-top: 26px; font-size: 1.08rem; }
+    p { margin: 12px 0; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; margin: 18px 0; box-shadow: 0 1px 2px rgba(15,23,42,0.03); }
+    pre { background: var(--code-bg); color: var(--code-ink); border-radius: 10px; padding: 16px 18px; overflow-x: auto; font-size: 0.88rem; line-height: 1.55; margin: 14px 0; border-left: 4px solid var(--accent); }
+    code { font-family: "SF Mono", "Cascadia Code", Consolas, Menlo, monospace; }
+    p code, li code, td code { background: var(--accent-soft); color: #c2410c; padding: 2px 6px; border-radius: 5px; font-size: 0.88em; }
+    .comment { color: #7c8aa0; font-style: italic; }
+    .tag { color: #7dd3fc; }
+    .attr { color: #fbbf24; }
+    .val { color: #a5f3c4; }
+    table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.92rem; background: #fff; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+    th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    th { background: var(--accent-soft); color: #c2410c; }
+    tr:last-child td { border-bottom: none; }
+    ul, ol { padding-left: 22px; }
+    li { margin: 6px 0; }
+    .tip { background: #fff7e6; border-left: 4px solid #f59e0b; padding: 12px 16px; border-radius: 8px; margin: 16px 0; color: #7a4c00; }
+    .note { background: var(--accent-soft); border-left: 4px solid var(--accent); padding: 12px 16px; border-radius: 8px; margin: 16px 0; }
+    .run-box { border: 1px dashed var(--border); border-radius: 10px; padding: 12px 16px; margin-top: 10px; background: #fbfcfe; }
+    .run-box .label { font-size: 0.78rem; letter-spacing: 0.5px; text-transform: uppercase; color: var(--muted); }
+    .demo-table { width: 100%; border-collapse: collapse; }
+    .demo-table th, .demo-table td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    .demo-table th { background: var(--accent-soft); }
+    footer { margin-top: 48px; text-align: center; color: var(--muted); font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <h1>Structure of an HTML5 Table</h1>
+    <p>A complete guide to building tables with thead, tbody, tfoot, caption, colspan, and rowspan.</p>
+    <span class="badge">HTML5 · Tables · Layout</span>
+  </header>
+
+  <!-- 1. INTRODUCTION -->
+  <h2><span class="num">1</span>Introduction</h2>
+  <p>
+    A <strong>table</strong> is the standard way to present data in rows and columns — like a timetable, a price list, a comparison chart, or a result sheet. HTML5 gives us a rich set of tags to build tables that are well-structured, readable, and accessible.
+  </p>
+  <p>
+    Before HTML5, tables were even abused for page layout. Today we use CSS for layout, and tables are used properly — for <em>tabular data</em>. A well-built table should separate its structure into logical parts so that browsers, search engines, and screen readers all understand it.
+  </p>
+  <p>
+    HTML5 tables are built around a few key elements:
+  </p>
+  <ul>
+    <li><strong>&lt;table&gt;</strong> — the container for the whole table.</li>
+    <li><strong>&lt;caption&gt;</strong> — a title/description for the table.</li>
+    <li><strong>&lt;thead&gt;</strong> — the header row(s) at the top.</li>
+    <li><strong>&lt;tbody&gt;</strong> — the main body of data rows.</li>
+    <li><strong>&lt;tfoot&gt;</strong> — the footer row(s) at the bottom (e.g., totals).</li>
+    <li><strong>&lt;tr&gt;</strong> — a single row.</li>
+    <li><strong>&lt;th&gt;</strong> — a header cell (bold by default).</li>
+    <li><strong>&lt;td&gt;</strong> — a regular data cell.</li>
+    <li><strong>&lt;colspan&gt;</strong> / <strong>&lt;rowspan&gt;</strong> — attributes that merge cells.</li>
+  </ul>
+
+  <!-- 2. SYNTAX -->
+  <h2><span class="num">2</span>Syntax and its Explanation</h2>
+  <p>The general skeleton of an HTML5 table looks like this:</p>
+  <pre><code><span class="tag">&lt;table&gt;</span>
+  <span class="tag">&lt;caption&gt;</span>Table Title<span class="tag">&lt;/caption&gt;</span>
+
+  <span class="tag">&lt;thead&gt;</span>
+    <span class="tag">&lt;tr&gt;</span>
+      <span class="tag">&lt;th&gt;</span>Column A<span class="tag">&lt;/th&gt;</span>
+      <span class="tag">&lt;th&gt;</span>Column B<span class="tag">&lt;/th&gt;</span>
+    <span class="tag">&lt;/tr&gt;</span>
+  <span class="tag">&lt;/thead&gt;</span>
+
+  <span class="tag">&lt;tbody&gt;</span>
+    <span class="tag">&lt;tr&gt;</span>
+      <span class="tag">&lt;td&gt;</span>Data 1<span class="tag">&lt;/td&gt;</span>
+      <span class="tag">&lt;td&gt;</span>Data 2<span class="tag">&lt;/td&gt;</span>
+    <span class="tag">&lt;/tr&gt;</span>
+  <span class="tag">&lt;/tbody&gt;</span>
+
+  <span class="tag">&lt;tfoot&gt;</span>
+    <span class="tag">&lt;tr&gt;</span>
+      <span class="tag">&lt;td&gt;</span>Total<span class="tag">&lt;/td&gt;</span>
+      <span class="tag">&lt;td&gt;</span>Sum<span class="tag">&lt;/td&gt;</span>
+    <span class="tag">&lt;/tr&gt;</span>
+  <span class="tag">&lt;/tfoot&gt;</span>
+<span class="tag">&lt;/table&gt;</span></code></pre>
+
+  <h3>Cells: &lt;th&gt; vs &lt;td&gt;</h3>
+  <table>
+    <tr><th>Element</th><th>Meaning</th><th>Appearance</th></tr>
+    <tr><td><code>&lt;th&gt;</code></td><td>A <strong>header</strong> cell — labels a row or column.</td><td>Bold and centered by default.</td></tr>
+    <tr><td><code>&lt;td&gt;</code></td><td>A standard <strong>data</strong> cell.</td><td>Regular text, left-aligned by default.</td></tr>
+    <tr><td><code>&lt;tr&gt;</code></td><td>A table <strong>row</strong>.</td><td>Holds one or more cells.</td></tr>
+  </table>
+
+  <h3>Merging cells: colspan and rowspan</h3>
+  <p>Sometimes a cell needs to span more than one column or row.</p>
+  <pre><code><span class="comment">&lt;!-- colspan: this cell stretches across 3 columns --&gt;</span>
+<span class="tag">&lt;th</span> <span class="attr">colspan</span>=<span class="val">"3"</span><span class="tag">&gt;</span>Annual Report<span class="tag">&lt;/th&gt;</span>
+
+<span class="comment">&lt;!-- rowspan: this cell stretches down 2 rows --&gt;</span>
+<span class="tag">&lt;td</span> <span class="attr">rowspan</span>=<span class="val">"2"</span><span class="tag">&gt;</span>Label<span class="tag">&lt;/td&gt;</span></code></pre>
+  <table>
+    <tr><th>Attribute</th><th>What it does</th><th>Direction</th></tr>
+    <tr><td><code>colspan</code></td><td>Makes a single cell span <em>multiple columns</em> (horizontally).</td><td>Across →</td></tr>
+    <tr><td><code>rowspan</code></td><td>Makes a single cell span <em>multiple rows</em> (vertically).</td><td>Down ↓</td></tr>
+  </table>
+
+  <div class="note">
+    <strong>Key rule:</strong> A table should contain one <code>&lt;caption&gt;</code>, one <code>&lt;thead&gt;</code>, one (or more) <code>&lt;tbody&gt;</code>, and one <code>&lt;tfoot&gt;</code>. The header (<code>&lt;thead&gt;</code>) should come <em>before</em> the body (<code>&lt;tbody&gt;</code>) in the code, even though the footer (<code>&lt;tfoot&gt;</code>) is visually at the bottom.
+  </div>
+
+  <!-- 3. FEATURES & USES -->
+  <h2><span class="num">3</span>Features &amp; Uses</h2>
+  <p>Here is what each table feature does, with a small example for each.</p>
+
+  <div class="card">
+    <h3>1. &lt;caption&gt; — a title for the table</h3>
+    <p>Gives the table a visible title/description. It is a great accessibility feature because it tells a screen reader what the table is about.</p>
+    <pre><code><span class="tag">&lt;caption&gt;</span>Monthly Sales Report<span class="tag">&lt;/caption&gt;</span></code></pre>
+  </div>
+
+  <div class="card">
+    <h3>2. &lt;thead&gt; — the header row(s)</h3>
+    <p>Wraps the top row that labels the columns. It is useful for styling (e.g., a colored header) and for repeating on each printed page.</p>
+    <pre><code><span class="tag">&lt;thead&gt;</span>
+  <span class="tag">&lt;tr&gt;</span><span class="tag">&lt;th&gt;</span>Product<span class="tag">&lt;/th&gt;</span><span class="tag">&lt;th&gt;</span>Price<span class="tag">&lt;/th&gt;</span><span class="tag">&lt;/tr&gt;</span>
+<span class="tag">&lt;/thead&gt;</span></code></pre>
+  </div>
+
+  <div class="card">
+    <h3>3. &lt;tbody&gt; — the data rows</h3>
+    <p>Groups the actual data rows. This is the main section of any table.</p>
+    <pre><code><span class="tag">&lt;tbody&gt;</span>
+  <span class="tag">&lt;tr&gt;</span><span class="tag">&lt;td&gt;</span>Laptop<span class="tag">&lt;/td&gt;</span><span class="tag">&lt;td&gt;</span>$999<span class="tag">&lt;/td&gt;</span><span class="tag">&lt;/tr&gt;</span>
+  <span class="tag">&lt;tr&gt;</span><span class="tag">&lt;td&gt;</span>Mouse<span class="tag">&lt;/td&gt;</span><span class="tag">&lt;td&gt;</span>$29<span class="tag">&lt;/td&gt;</span><span class="tag">&lt;/tr&gt;</span>
+<span class="tag">&lt;/tbody&gt;</span></code></pre>
+  </div>
+
+  <div class="card">
+    <h3>4. &lt;tfoot&gt; — the summary/footer rows</h3>
+    <p>Holds summary rows like totals or averages. In the HTML it is placed <em>after</em> the <code>&lt;tbody&gt;</code> in source order, though browsers display it at the bottom.</p>
+    <pre><code><span class="tag">&lt;tfoot&gt;</span>
+  <span class="tag">&lt;tr&gt;</span><span class="tag">&lt;td&gt;</span>Total<span class="tag">&lt;/td&gt;</span><span class="tag">&lt;td&gt;</span>$1028<span class="tag">&lt;/td&gt;</span><span class="tag">&lt;/tr&gt;</span>
+<span class="tag">&lt;/tfoot&gt;</span></code></pre>
+  </div>
+
+  <div class="card">
+    <h3>5. colspan — merge across columns</h3>
+    <p>Useful for a header spanning several columns or a cell that groups data.</p>
+    <pre><code><span class="tag">&lt;th</span> <span class="attr">colspan</span>=<span class="val">"2"</span><span class="tag">&gt;</span>Product Details<span class="tag">&lt;/th&gt;</span></code></pre>
+  </div>
+
+  <div class="card">
+    <h3>6. rowspan — merge down rows</h3>
+    <p>Useful when one value applies to several rows, like a category label spanning many items.</p>
+    <pre><code><span class="tag">&lt;td</span> <span class="attr">rowspan</span>=<span class="val">"3"</span><span class="tag">&gt;</span>Electronics<span class="tag">&lt;/td&gt;</span></code></pre>
+  </div>
+
+  <div class="tip">
+    <strong>Did you know?</strong> Modern tables use the semantic parts (<code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, <code>&lt;tfoot&gt;</code>) for the same reason we use <code>&lt;header&gt;</code>/<code>&lt;main&gt;</code>/<code>&lt;footer&gt;</code> in page layout — they make the structure understandable to browsers, search engines, and assistive technology.
+  </div>
+
+  <!-- 4. EXAMPLE PROGRAMS -->
+  <h2><span class="num">4</span>Example Programs with Explanation</h2>
+
+  <!-- Example 1 -->
+  <h3>Example 1 — A basic table with thead, tbody, tfoot, and caption</h3>
+  <p>This example builds a simple table showing products and prices, with a header row, three data rows, a footer total, and a caption title. It uses all five main structural tags in one table.</p>
+
+  <pre><code><span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="val">"en"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+  <span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="val">"UTF-8"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;style&gt;</span>
+    <span class="comment">/* thin borders to make the table clear */</span>
+    <span class="kw">table, th, td</span> { <span class="kw">border</span>: <span class="num">1px</span> <span class="kw">solid</span> <span class="str">#ccc</span>; <span class="kw">border-collapse</span>: <span class="kw">collapse</span>; <span class="kw">padding</span>: <span class="num">8px</span>; }
+    <span class="kw">th</span> { <span class="kw">background</span>: <span class="str">#fdecdd</span>; }
+  <span class="tag">&lt;/style&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+
+  <span class="tag">&lt;table&gt;</span>
+    <span class="tag">&lt;caption&gt;</span>Product Price List<span class="tag">&lt;/caption&gt;</span>
+
+    <span class="tag">&lt;thead&gt;</span>
+      <span class="tag">&lt;tr&gt;</span>
+        <span class="tag">&lt;th&gt;</span>Product<span class="tag">&lt;/th&gt;</span>
+        <span class="tag">&lt;th&gt;</span>Quantity<span class="tag">&lt;/th&gt;</span>
+        <span class="tag">&lt;th&gt;</span>Price<span class="tag">&lt;/th&gt;</span>
+      <span class="tag">&lt;/tr&gt;</span>
+    <span class="tag">&lt;/thead&gt;</span>
+
+    <span class="tag">&lt;tbody&gt;</span>
+      <span class="tag">&lt;tr&gt;</span><span class="tag">&lt;td&gt;</span>Laptop<span class="tag">&lt;/td&gt;</span><span class="tag">&lt;td&gt;</span>1<span class="tag">&lt;/td&gt;</span><span class="tag">&lt;td&gt;</span>$999<span class="tag">&lt;/td&gt;</span><span class="tag">&lt;/tr&gt;</span>
+      <span class="tag">&lt;tr&gt;</span><span class="tag">&lt;td&gt;</span>Mouse<span class="tag">&lt;/td&gt;</span><span class="tag">&lt;td&gt;</span>2<span class="tag">&lt;/td&gt;</span><span class="tag">&lt;td&gt;</span>$58<span class="tag">&lt;/td&gt;</span><span class="tag">&lt;/tr&gt;</span>
+      <span class="tag">&lt;tr&gt;</span><span class="tag">&lt;td&gt;</span>Keyboard<span class="tag">&lt;/td&gt;</span><span class="tag">&lt;td&gt;</span>1<span class="tag">&lt;/td&gt;</span><span class="tag">&lt;td&gt;</span>$45<span class="tag">&lt;/td&gt;</span><span class="tag">&lt;/tr&gt;</span>
+    <span class="tag">&lt;/tbody&gt;</span>
+
+    <span class="tag">&lt;tfoot&gt;</span>
+      <span class="tag">&lt;tr&gt;</span>
+        <span class="tag">&lt;td</span> <span class="attr">colspan</span>=<span class="val">"2"</span><span class="tag">&gt;</span>Total<span class="tag">&lt;/td&gt;</span>
+        <span class="tag">&lt;td&gt;</span>$1102<span class="tag">&lt;/td&gt;</span>
+      <span class="tag">&lt;/tr&gt;</span>
+    <span class="tag">&lt;/tfoot&gt;</span>
+  <span class="tag">&lt;/table&gt;</span>
+
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></code></pre>
+
+  <div class="card">
+    <strong>Explanation of Example 1:</strong>
+    <ul>
+      <li><code>&lt;caption&gt;</code> gives the table the title "Product Price List".</li>
+      <li><code>&lt;thead&gt;</code> holds the header row with column labels (Product, Quantity, Price).</li>
+      <li><code>&lt;tbody&gt;</code> contains the three data rows.</li>
+      <li><code>&lt;tfoot&gt;</code> holds the total row at the bottom.</li>
+      <li><code>colspan="2"</code> makes the "Total" label span the first two columns, so it lines up neatly with the price column.</li>
+    </ul>
+  </div>
+
+  <!-- Example 2 -->
+  <h3>Example 2 — Using colspan and rowspan to merge cells</h3>
+  <p>This example shows a more complex table with merged cells. <code>rowspan</code> combines multiple rows under one category, and <code>colspan</code> combines columns for a heading and a full-width note.</p>
+
+  <pre><code><span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="val">"en"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+  <span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="val">"UTF-8"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;style&gt;</span>
+    <span class="kw">table, th, td</span> { <span class="kw">border</span>: <span class="num">1px</span> <span class="kw">solid</span> <span class="str">#ccc</span>; <span class="kw">border-collapse</span>: <span class="kw">collapse</span>; <span class="kw">padding</span>: <span class="num">8px</span>; <span class="kw">text-align</span>: <span class="kw">center</span>; }
+    <span class="kw">th</span> { <span class="kw">background</span>: <span class="str">#fdecdd</span>; }
+  <span class="tag">&lt;/style&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+
+  <span class="tag">&lt;table&gt;</span>
+    <span class="tag">&lt;caption&gt;</span>Store Inventory by Category<span class="tag">&lt;/caption&gt;</span>
+
+    <span class="tag">&lt;tr&gt;</span>
+      <span class="tag">&lt;th</span> <span class="attr">colspan</span>=<span class="val">"3"</span><span class="tag">&gt;</span>Available Items<span class="tag">&lt;/th&gt;</span>
+    <span class="tag">&lt;/tr&gt;</span>
+    <span class="tag">&lt;tr&gt;</span>
+      <span class="tag">&lt;th&gt;</span>Category<span class="tag">&lt;/th&gt;</span>
+      <span class="tag">&lt;th&gt;</span>Item<span class="tag">&lt;/th&gt;</span>
+      <span class="tag">&lt;th&gt;</span>Stock<span class="tag">&lt;/th&gt;</span>
+    <span class="tag">&lt;/tr&gt;</span>
+
+    <span class="comment">&lt;!-- rowspan spans 2 rows for the "Electronics" category --&gt;</span>
+    <span class="tag">&lt;tr&gt;</span>
+      <span class="tag">&lt;td</span> <span class="attr">rowspan</span>=<span class="val">"2"</span><span class="tag">&gt;</span>Electronics<span class="tag">&lt;/td&gt;</span>
+      <span class="tag">&lt;td&gt;</span>Laptop<span class="tag">&lt;/td&gt;</span>
+      <span class="tag">&lt;td&gt;</span>10<span class="tag">&lt;/td&gt;</span>
+    <span class="tag">&lt;/tr&gt;</span>
+    <span class="tag">&lt;tr&gt;</span>
+      <span class="tag">&lt;td&gt;</span>Phone<span class="tag">&lt;/td&gt;</span>
+      <span class="tag">&lt;td&gt;</span>25<span class="tag">&lt;/td&gt;</span>
+    <span class="tag">&lt;/tr&gt;</span>
+
+    <span class="comment">&lt;!-- rowspan spans 2 rows for the "Furniture" category --&gt;</span>
+    <span class="tag">&lt;tr&gt;</span>
+      <span class="tag">&lt;td</span> <span class="attr">rowspan</span>=<span class="val">"2"</span><span class="tag">&gt;</span>Furniture<span class="tag">&lt;/td&gt;</span>
+      <span class="tag">&lt;td&gt;</span>Chair<span class="tag">&lt;/td&gt;</span>
+      <span class="tag">&lt;td&gt;</span>40<span class="tag">&lt;/td&gt;</span>
+    <span class="tag">&lt;/tr&gt;</span>
+    <span class="tag">&lt;tr&gt;</span>
+      <span class="tag">&lt;td&gt;</span>Table<span class="tag">&lt;/td&gt;</span>
+      <span class="tag">&lt;td&gt;</span>12<span class="tag">&lt;/td&gt;</span>
+    <span class="tag">&lt;/tr&gt;</span>
+
+    <span class="comment">&lt;!-- colspan spans all 3 columns for a full-width note --&gt;</span>
+    <span class="tag">&lt;tr&gt;</span>
+      <span class="tag">&lt;td</span> <span class="attr">colspan</span>=<span class="val">"3"</span><span class="tag">&gt;</span>Total items in stock: 87<span class="tag">&lt;/td&gt;</span>
+    <span class="tag">&lt;/tr&gt;</span>
+  <span class="tag">&lt;/table&gt;</span>
+
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></code></pre>
+
+  <div class="card">
+    <strong>Explanation of Example 2:</strong>
+    <ul>
+      <li><code>colspan="3"</code> on the top row merges all three columns into a single heading "Available Items".</li>
+      <li><code>rowspan="2"</code> on the "Electronics" cell makes the category label span the two rows below it (Laptop, Phone). The second row (Phone) therefore needs no separate Category cell.</li>
+      <li>The same <code>rowspan="2"</code> idea is used for "Furniture" (Chair, Table).</li>
+      <li>The last <code>colspan="3"</code> creates a full-width summary line across the entire table.</li>
+    </ul>
+    <div class="run-box">
+      <div class="label">How to try it</div>
+      Copy either example into a file named <code>index.html</code> and open it in a browser. You'll see the borders make the structure obvious. To really understand rowspan/colspan, try changing the numbers and observe how the grid reflows.
+    </div>
+  </div>
+
+  <!-- 5. ADVANTAGES -->
+  <h2><span class="num">5</span>Advantages</h2>
+  <ul>
+    <li><strong>Clear data presentation:</strong> Perfect for showing data that belongs in rows and columns, like reports and comparisons.</li>
+    <li><strong>Better accessibility:</strong> <code>&lt;caption&gt;</code>, <code>&lt;th&gt;</code>, and the row/column structure let screen readers present data in an understandable way.</li>
+    <li><strong>Improved SEO:</strong> Well-structured tables are easier for search engines to read and interpret.</li>
+    <li><strong>Semantic &amp; readable code:</strong> <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, and <code>&lt;tfoot&gt;</code> make the purpose of each section obvious.</li>
+    <li><strong>Flexible layout:</strong> <code>colspan</code> and <code>rowspan</code> let you merge cells to create a clean, professional grid.</li>
+    <li><strong>Reusable &amp; styleable:</strong> Tables work easily with CSS, so you can style headers, rows, or zebra-stripe the body.</li>
+  </ul>
+
+  <!-- 6. CONCLUSION -->
+  <h2><span class="num">6</span>Conclusion</h2>
+  <p>
+    Tables are the natural way to present relational data, and HTML5 gives us the tools to build them with clear structure and meaning. A well-constructed table includes a <code>&lt;caption&gt;</code>, a <code>&lt;thead&gt;</code> for the header labels, a <code>&lt;tbody&gt;</code> for the data, and a <code>&lt;tfoot&gt;</code> for summaries — and uses <code>colspan</code> and <code>rowspan</code> to merge cells wherever a value spans multiple columns or rows.
+  </p>
+  <p>
+    In summary: <strong>use semantic tags to define the purpose of each part of the table, and colspan/rowspan to control how cells combine.</strong> This makes your data readable for everyone — sighted users, screen-reader users, and search engines alike. As the rule of thumb goes: <em>"Use tables for data, not for layout — and always give them structure."</em>
+  </p>
+
+  <footer>Created with the Arena.ai Agent · Structure of an HTML5 Table</footer>
+</div>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v3d52b47920f24c319d37e2661827c42b1787588026925" integrity="sha512-d9sL6GJLXn6fInD1+TVXhTcQOsmxeHfmHAvwGDIxp5TO+uo1fiWW7mHomMj4MLRlCsJDTqXzWLHJFFlPCEIj/A==" data-cf-beacon='{"version":"2024.11.0","token":"1954b47c125f43f8b4338b3c4f804e4f"}' crossorigin="anonymous"></script>
+</body>
+</html>

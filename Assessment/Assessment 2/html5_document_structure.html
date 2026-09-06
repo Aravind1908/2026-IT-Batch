@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A detailed, beginner-friendly guide to the structure of an HTML5 document with a sample skeleton including doctype, head, meta charset, viewport, and body.">
+  <meta name="author" content="Arena.ai Agent">
+  <meta name="keywords" content="HTML5 document structure, doctype, head, meta charset, viewport, body, html skeleton">
+  <title>Structure of an HTML5 Document</title>
+  <style>
+    :root {
+      --ink: #1f2430;
+      --muted: #5b6270;
+      --accent: #e11d48;
+      --accent-soft: #fde7ec;
+      --code-bg: #0f172a;
+      --code-ink: #e2e8f0;
+      --border: #e3e7ee;
+      --card: #ffffff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--ink);
+      background: #f6f8fb;
+      line-height: 1.7;
+    }
+    .wrap { max-width: 860px; margin: 0 auto; padding: 32px 20px 80px; }
+    header.hero {
+      background: linear-gradient(135deg, #e11d48, #be123c);
+      color: #fff; border-radius: 16px; padding: 36px 28px; margin-bottom: 28px;
+    }
+    header.hero h1 { margin: 0 0 8px; font-size: 1.9rem; }
+    header.hero p { margin: 0; opacity: 0.92; }
+    .badge {
+      display: inline-block; background: rgba(255,255,255,0.18); border-radius: 999px;
+      padding: 3px 12px; font-size: 0.8rem; margin-top: 14px; letter-spacing: 0.4px;
+    }
+    h2 {
+      font-size: 1.4rem; color: #be123c; border-bottom: 2px solid var(--accent-soft);
+      padding-bottom: 6px; margin-top: 42px;
+    }
+    h2 .num {
+      display: inline-block; width: 28px; height: 28px; line-height: 28px; text-align: center;
+      background: var(--accent); color: #fff; border-radius: 50%; font-size: 0.9rem; margin-right: 10px;
+    }
+    h3 { color: var(--ink); margin-top: 26px; font-size: 1.08rem; }
+    p { margin: 12px 0; }
+    .card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+      padding: 18px 20px; margin: 18px 0; box-shadow: 0 1px 2px rgba(15,23,42,0.03);
+    }
+    pre {
+      background: var(--code-bg); color: var(--code-ink); border-radius: 10px; padding: 16px 18px;
+      overflow-x: auto; font-size: 0.88rem; line-height: 1.55; margin: 14px 0; border-left: 4px solid var(--accent);
+    }
+    code { font-family: "SF Mono", "Cascadia Code", Consolas, Menlo, monospace; }
+    p code, li code, td code {
+      background: var(--accent-soft); color: #be123c; padding: 2px 6px; border-radius: 5px; font-size: 0.88em;
+    }
+    .comment { color: #7c8aa0; font-style: italic; }
+    .tag { color: #7dd3fc; }
+    .attr { color: #fbbf24; }
+    .val { color: #a5f3c4; }
+    table {
+      width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.92rem; background: #fff;
+      border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
+    }
+    th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    th { background: var(--accent-soft); color: #be123c; }
+    tr:last-child td { border-bottom: none; }
+    ul, ol { padding-left: 22px; }
+    li { margin: 6px 0; }
+    .tip {
+      background: #fff7e6; border-left: 4px solid #f59e0b; padding: 12px 16px; border-radius: 8px;
+      margin: 16px 0; color: #7a4c00;
+    }
+    .note {
+      background: var(--accent-soft); border-left: 4px solid var(--accent); padding: 12px 16px;
+      border-radius: 8px; margin: 16px 0;
+    }
+    .run-box {
+      border: 1px dashed var(--border); border-radius: 10px; padding: 12px 16px; margin-top: 10px; background: #fbfcfe;
+    }
+    .run-box .label { font-size: 0.78rem; letter-spacing: 0.5px; text-transform: uppercase; color: var(--muted); }
+    .skeleton {
+      background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 16px 20px; margin: 14px 0;
+    }
+    .skeleton .lbl { display: inline-block; font-size: 0.72rem; letter-spacing: 0.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+    footer { margin-top: 48px; text-align: center; color: var(--muted); font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <h1>Structure of an HTML5 Document</h1>
+    <p>The anatomy of a valid HTML5 page — doctype, head, meta charset, viewport, and body — with a sample skeleton.</p>
+    <span class="badge">HTML5 · Document Structure</span>
+  </header>
+
+  <!-- 1. INTRODUCTION -->
+  <h2><span class="num">1</span>Introduction</h2>
+  <p>
+    Every HTML document — no matter how simple or complex — follows the same basic skeleton. Knowing this structure is the first step to writing any webpage, because it tells the browser <em>what kind of document</em> it is reading and <em>where each piece of content should go</em>.
+  </p>
+  <p>
+    An HTML5 document is made up of a few fixed, important parts nested inside each other. At the very top is the <code>&lt;!DOCTYPE html&gt;</code> declaration, then a single <code>&lt;html&gt;</code> element that wraps everything. Inside the <code>&lt;html&gt;</code> element, the document is divided into two main sections:
+  </p>
+  <ul>
+    <li>The <strong>&lt;head&gt;</strong> — metadata that describes the document but is <em>not displayed</em> on the page (charset, viewport, title, styles, links).</li>
+    <li>The <strong>&lt;body&gt;</strong> — everything the user <em>actually sees</em>: text, images, videos, forms, etc.</li>
+  </ul>
+  <p>
+    Think of an HTML document like a physical letter: the <code>&lt;head&gt;</code> acts like the envelope and postmark (information <em>about</em> the letter), and the <code>&lt;body&gt;</code> is the letter's contents (what you read).
+  </p>
+
+  <!-- 2. SYNTAX -->
+  <h2><span class="num">2</span>Syntax and its Explanation</h2>
+  <p>The general skeleton of an HTML5 document looks like this:</p>
+  <pre><code><span class="tag">&lt;!DOCTYPE html&gt;</span>                          <span class="comment">&lt;!-- 1. Document type --&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="val">"en"</span><span class="tag">&gt;</span>                              <span class="comment">&lt;!-- 2. Root element --&gt;</span>
+  <span class="tag">&lt;head&gt;</span>                                <span class="comment">&lt;!-- 3. Metadata (not shown) --&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="val">"UTF-8"</span><span class="tag">&gt;</span>                 <span class="comment">&lt;!-- character encoding --&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="attr">name</span>=<span class="val">"viewport"</span> <span class="attr">content</span>=<span class="val">"width=device-width, initial-scale=1.0"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;title&gt;</span>Page Title<span class="tag">&lt;/title&gt;</span>
+  <span class="tag">&lt;/head&gt;</span>
+  <span class="tag">&lt;body&gt;</span>                                <span class="comment">&lt;!-- 4. Visible content --&gt;</span>
+    <span class="comment">&lt;!-- Your content goes here --&gt;</span>
+  <span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></code></pre>
+
+  <h3>Each part explained</h3>
+  <table>
+    <tr><th>Part</th><th>Purpose</th></tr>
+    <tr><td><code>&lt;!DOCTYPE html&gt;</code></td><td>Tells the browser "this is an HTML5 document." Must be the very first line, before anything else.</td></tr>
+    <tr><td><code>&lt;html&gt;</code></td><td>The root element that wraps the entire page. The <code>lang</code> attribute declares the language (e.g. <code>en</code> for English), which helps screen readers and search engines.</td></tr>
+    <tr><td><code>&lt;head&gt;</code></td><td>Contains metadata about the document — info for the browser, not for the viewer. It is not visible on the page.</td></tr>
+    <tr><td><code>&lt;meta charset="UTF-8"&gt;</code></td><td>Declares the character encoding so that special characters, emoji, and non-English text display correctly. Should be the first element inside <code>&lt;head&gt;</code>.</td></tr>
+    <tr><td><code>&lt;meta name="viewport" ...&gt;</code></td><td>Controls how the page scales on mobile devices, making the site responsive.</td></tr>
+    <tr><td><code>&lt;title&gt;</code></td><td>The text shown on the browser tab and in search results. Required for a valid document.</td></tr>
+    <tr><td><code>&lt;body&gt;</code></td><td>Holds all the visible content — headings, paragraphs, images, links, forms, etc.</td></tr>
+  </table>
+
+  <div class="note">
+    <strong>Key rule:</strong> A valid HTML5 document has exactly <strong>one</strong> <code>&lt;html&gt;</code>, one <code>&lt;head&gt;</code>, and one <code>&lt;body&gt;</code>. The <code>&lt;doctype&gt;</code> must be the very first thing on line one, and the <code>&lt;head&gt;</code> must come before the <code>&lt;body&gt;</code>.
+  </div>
+
+  <!-- 3. FEATURES & USES -->
+  <h2><span class="num">3</span>Features &amp; Uses</h2>
+  <p>Here is what each part of the skeleton contributes and why it matters for a real, working web page.</p>
+
+  <div class="card">
+    <h3>1. The doctype — standards mode</h3>
+    <p>Without it, the browser may switch into "quirks mode" and render the page unexpectedly. Declaring <code>&lt;!DOCTYPE html&gt;</code> switches the browser into modern standards mode for consistent rendering.</p>
+    <pre><code><span class="tag">&lt;!DOCTYPE html&gt;</span></code></pre>
+  </div>
+
+  <div class="card">
+    <h3>2. Character encoding (charset)</h3>
+    <p>Declaring <code>UTF-8</code> early prevents garbled text. It supports nearly every character and script in the world, including emoji and non-Latin languages like Hindi, Chinese, and Arabic.</p>
+    <pre><code><span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="val">"UTF-8"</span><span class="tag">&gt;</span></code></pre>
+  </div>
+
+  <div class="card">
+    <h3>3. The viewport — mobile friendliness</h3>
+    <p>Modern websites must look good on phones. The viewport meta tag sets the visible area and zoom level, so a page doesn't render tiny on a mobile screen. Without it, mobile sites often appear zoomed-out and unreadable.</p>
+    <pre><code><span class="tag">&lt;meta</span> <span class="attr">name</span>=<span class="val">"viewport"</span> <span class="attr">content</span>=<span class="val">"width=device-width, initial-scale=1.0"</span><span class="tag">&gt;</span></code></pre>
+  </div>
+
+  <div class="card">
+    <h3>4. The title — tab &amp; SEO</h3>
+    <p>Every document should have a <code>&lt;title&gt;</code>. It appears in the browser tab and is heavily used by search engines for the clickable result heading.</p>
+    <pre><code><span class="tag">&lt;title&gt;</span>My Awesome Website<span class="tag">&lt;/title&gt;</span></code></pre>
+  </div>
+
+  <div class="card">
+    <h3>5. The body — the content</h3>
+    <p>The whole point of the page. Everything a user reads or interacts with lives here: text, images, links, lists, forms, media, and the semantic structure we studied earlier (<code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, etc.).</p>
+    <pre><code><span class="tag">&lt;body&gt;</span>
+  <span class="tag">&lt;h1&gt;</span>Hello World<span class="tag">&lt;/h1&gt;</span>
+<span class="tag">&lt;/body&gt;</span></code></pre>
+  </div>
+
+  <div class="tip">
+    <strong>Did you know?</strong> The <code>&lt;head&gt;</code> content is never shown in the browser, yet it is essential — it tells the browser how to read and display the page, and it communicates with search engines and social platforms.
+  </div>
+
+  <!-- 4. EXAMPLE PROGRAMS -->
+  <h2><span class="num">4</span>Example Programs with Explanation</h2>
+
+  <!-- Example 1 -->
+  <h3>Example 1 — The minimal valid HTML5 skeleton</h3>
+  <p>This is the smallest possible document that browsers accept as valid HTML5. It contains every required part: doctype, html, head, meta charset, title, and a body with a single heading.</p>
+
+  <pre><code><span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="val">"en"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+  <span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="val">"UTF-8"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;title&gt;</span>My First Page<span class="tag">&lt;/title&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+  <span class="tag">&lt;h1&gt;</span>Hello, World!<span class="tag">&lt;/h1&gt;</span>
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></code></pre>
+
+  <div class="card">
+    <strong>Explanation of Example 1:</strong>
+    <ul>
+      <li><code>&lt;!DOCTYPE html&gt;</code> — declares HTML5 and enables standards mode.</li>
+      <li><code>&lt;html lang="en"&gt;</code> — the root element, declaring the language as English.</li>
+      <li><code>&lt;head&gt;</code> — contains the metadata, including <code>charset="UTF-8"</code> and the page <code>&lt;title&gt;</code>.</li>
+      <li><code>&lt;body&gt;</code> — holds the visible content: a single heading.</li>
+    </ul>
+  </div>
+
+  <!-- Example 2 -->
+  <h3>Example 2 — A fuller document (skeleton + all head tags + semantic layout)</h3>
+  <p>This example is a more realistic page. It adds the viewport meta tag, a description for SEO, and uses the semantic elements (<code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;footer&gt;</code>) inside the body to build a proper page structure.</p>
+
+  <pre><code><span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="val">"en"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+  <span class="comment">&lt;!-- Character encoding: must be first --&gt;</span>
+  <span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="val">"UTF-8"</span><span class="tag">&gt;</span>
+
+  <span class="comment">&lt;!-- Responsive viewport for mobile --&gt;</span>
+  <span class="tag">&lt;meta</span> <span class="attr">name</span>=<span class="val">"viewport"</span> <span class="attr">content</span>=<span class="val">"width=device-width, initial-scale=1.0"</span><span class="tag">&gt;</span>
+
+  <span class="comment">&lt;!-- SEO description --&gt;</span>
+  <span class="tag">&lt;meta</span> <span class="attr">name</span>=<span class="val">"description"</span> <span class="attr">content</span>=<span class="val">"My responsive website."</span><span class="tag">&gt;</span>
+
+  <span class="tag">&lt;title&gt;</span>Home - My Website<span class="tag">&lt;/title&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+
+<span class="tag">&lt;body&gt;</span>
+  <span class="tag">&lt;header&gt;</span>   <span class="tag">&lt;h1&gt;</span>My Website<span class="tag">&lt;/h1&gt;</span>   <span class="tag">&lt;/header&gt;</span>
+  <span class="tag">&lt;nav&gt;</span>      Menu links                <span class="tag">&lt;/nav&gt;</span>
+  <span class="tag">&lt;main&gt;</span>     <span class="tag">&lt;p&gt;</span>Main content here.<span class="tag">&lt;/p&gt;</span> <span class="tag">&lt;/main&gt;</span>
+  <span class="tag">&lt;footer&gt;</span>   <span class="tag">&lt;p&gt;</span>&amp;copy; 2026 My Website<span class="tag">&lt;/p&gt;</span> <span class="tag">&lt;/footer&gt;</span>
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></code></pre>
+
+  <div class="card">
+    <strong>Explanation of Example 2:</strong>
+    <ul>
+      <li>The <code>&lt;head&gt;</code> now includes <code>viewport</code> (for mobile) and a <code>description</code> (for SEO), alongside <code>charset</code> and <code>title</code>.</li>
+      <li>The <code>&lt;body&gt;</code> uses semantic elements — <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, and <code>&lt;footer&gt;</code> — to build a logical, meaningful layout.</li>
+      <li>The structure remains the same as Example 1 (doctype → html → head → body), but it is now a realistic, production-ready page skeleton.</li>
+    </ul>
+    <div class="run-box">
+      <div class="label">How to try it</div>
+      Copy either example into a file named <code>index.html</code> and open it in a browser. Notice that on a phone, Example 2 stays readable thanks to the viewport tag. Check the browser tab for the title, and press <strong>Ctrl+U</strong> to view the source and see the full skeleton.
+    </div>
+  </div>
+
+  <!-- 5. ADVANTAGES -->
+  <h2><span class="num">5</span>Advantages</h2>
+  <ul>
+    <li><strong>Valid &amp; consistent rendering:</strong> The doctype ensures all browsers use modern standards, so your page looks the same everywhere.</li>
+    <li><strong>Correct special characters:</strong> <code>charset="UTF-8"</code> prevents broken or garbled text.</li>
+    <li><strong>Mobile responsive:</strong> The viewport tag makes your site readable and usable on phones and tablets.</li>
+    <li><strong>Better SEO:</strong> A proper <code>&lt;title&gt;</code> and <code>&lt;meta description&gt;</code> improve how your page appears in search results.</li>
+    <li><strong>Starts every project cleanly:</strong> Using a correct skeleton means you never begin with errors or unexpected browser behaviour.</li>
+    <li><strong>Accessible &amp; organized:</strong> Semantic structure inside the body plus a clear head creates pages that work well for screen readers and are easy to maintain.</li>
+  </ul>
+
+  <!-- 6. CONCLUSION -->
+  <h2><span class="num">6</span>Conclusion</h2>
+  <p>
+    The structure of an HTML5 document is simple but essential. Every page begins with the <code>&lt;!DOCTYPE html&gt;</code> declaration, wraps all its content inside a single <code>&lt;html&gt;</code> element, and then splits into two parts: a <code>&lt;head&gt;</code> that describes the page to the browser (using <code>charset</code>, <code>viewport</code>, and <code>title</code>), and a <code>&lt;body&gt;</code> that holds everything the user sees and interacts with.
+  </p>
+  <p>
+    In summary: <strong>the doctype tells the browser what kind of document it is, the head describes it, and the body displays it.</strong> Getting this skeleton right from the very start prevents rendering bugs, makes your site mobile-friendly, helps with SEO, and sets a clean foundation for everything you build on top. It is the first and most important habit of any web developer. Quoting the common rule of thumb: <em>"Every great webpage starts with a clean skeleton."</em>
+  </p>
+
+  <footer>Created with the Arena.ai Agent · Structure of an HTML5 Document</footer>
+</div>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a321c4792c6baf9e',t:'MTc4NzkwMzg3MA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v3d52b47920f24c319d37e2661827c42b1787588026925" integrity="sha512-d9sL6GJLXn6fInD1+TVXhTcQOsmxeHfmHAvwGDIxp5TO+uo1fiWW7mHomMj4MLRlCsJDTqXzWLHJFFlPCEIj/A==" data-cf-beacon='{"version":"2024.11.0","token":"1954b47c125f43f8b4338b3c4f804e4f"}' crossorigin="anonymous"></script>
+</body>
+</html>

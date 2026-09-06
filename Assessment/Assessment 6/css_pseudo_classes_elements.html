@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A detailed, beginner-friendly guide differentiating CSS pseudo-classes (hover, focus, nth-child, not) from pseudo-elements (before, after, first-line) with examples.">
+  <meta name="author" content="Arena.ai Agent">
+  <meta name="keywords" content="CSS pseudo-classes, pseudo-elements, :hover, :focus, :nth-child, :not, ::before, ::after, ::first-line">
+  <title>CSS Pseudo-classes &amp; Pseudo-elements</title>
+  <style>
+    :root { --ink:#1f2430; --muted:#5b6270; --accent:#047857; --accent-soft:#e4f4ee; --code-bg:#0f172a; --code-ink:#e2e8f0; --border:#e3e7ee; --card:#ffffff; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; color:var(--ink); background:#f6f8fb; line-height:1.7; }
+    .wrap { max-width:860px; margin:0 auto; padding:32px 20px 80px; }
+    header.hero { background:linear-gradient(135deg,#047857,#065f46); color:#fff; border-radius:16px; padding:36px 28px; margin-bottom:28px; }
+    header.hero h1 { margin:0 0 8px; font-size:1.9rem; }
+    header.hero p { margin:0; opacity:0.92; }
+    .badge { display:inline-block; background:rgba(255,255,255,0.18); border-radius:999px; padding:3px 12px; font-size:0.8rem; margin-top:14px; letter-spacing:0.4px; }
+    h2 { font-size:1.4rem; color:#065f46; border-bottom:2px solid var(--accent-soft); padding-bottom:6px; margin-top:42px; }
+    h2 .num { display:inline-block; width:28px; height:28px; line-height:28px; text-align:center; background:var(--accent); color:#fff; border-radius:50%; font-size:0.9rem; margin-right:10px; }
+    h3 { color:var(--ink); margin-top:26px; font-size:1.08rem; }
+    p { margin:12px 0; }
+    .card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:18px 20px; margin:18px 0; box-shadow:0 1px 2px rgba(15,23,42,0.03); }
+    pre { background:var(--code-bg); color:var(--code-ink); border-radius:10px; padding:16px 18px; overflow-x:auto; font-size:0.88rem; line-height:1.55; margin:14px 0; border-left:4px solid var(--accent); }
+    code { font-family:"SF Mono","Cascadia Code",Consolas,Menlo,monospace; }
+    p code, li code, td code { background:var(--accent-soft); color:#065f46; padding:2px 6px; border-radius:5px; font-size:0.88em; }
+    .comment { color:#7c8aa0; font-style:italic; }
+    .kw { color:#c084fc; }
+    .str { color:#a5f3c4; }
+    .num { color:#fca5a5; }
+    .sel { color:#7dd3fc; }
+    table { width:100%; border-collapse:collapse; margin:16px 0; font-size:0.92rem; background:#fff; border:1px solid var(--border); border-radius:10px; overflow:hidden; }
+    th,td { text-align:left; padding:10px 12px; border-bottom:1px solid var(--border); }
+    th { background:var(--accent-soft); color:#065f46; }
+    tr:last-child td { border-bottom:none; }
+    ul,ol { padding-left:22px; }
+    li { margin:6px 0; }
+    .tip { background:#fff7e6; border-left:4px solid #f59e0b; padding:12px 16px; border-radius:8px; margin:16px 0; color:#7a4c00; }
+    .note { background:var(--accent-soft); border-left:4px solid var(--accent); padding:12px 16px; border-radius:8px; margin:16px 0; }
+    .run-box { border:1px dashed var(--border); border-radius:10px; padding:12px 16px; margin-top:10px; background:#fbfcfe; }
+    .run-box .label { font-size:0.78rem; letter-spacing:0.5px; text-transform:uppercase; color:var(--muted); }
+    .demo { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:18px 20px; margin:18px 0; }
+    .demo-btn { background:#047857; color:#fff; padding:10px 20px; border:none; border-radius:6px; cursor:pointer; font-size:1rem; }
+    .demo-btn:hover { background:#065f46; }
+    .demo-btn:focus { outline:3px solid #f59e0b; }
+    .demo-list li:nth-child(odd) { background:#e4f4ee; }
+    .demo-list li:nth-child(even) { background:#fff; }
+    .card-note { position:relative; padding:16px; background:#f6f8fb; border-radius:8px; }
+    .card-note::before { content:"TIP: "; font-weight:bold; color:#047857; }
+    .card-note::after { content:" (end of note)"; color:#94a3b8; }
+    footer { margin-top:48px; text-align:center; color:var(--muted); font-size:0.85rem; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <h1>CSS Pseudo-classes &amp; Pseudo-elements</h1>
+    <p>Understanding the difference between :hover, :focus, :nth-child, :not — and ::before, ::after, ::first-line — with examples.</p>
+    <span class="badge">CSS · Selectors · Interaction</span>
+  </header>
+
+  <!-- 1. INTRODUCTION -->
+  <h2><span class="num">1</span>Introduction</h2>
+  <p>
+    Sometimes you want to style an element based on a <em>state</em> it is in — like when the user hovers over a link, or when a field has focus — or style a <em>part</em> of an element, like just the first line of a paragraph. Regular selectors can't easily express these, so CSS provides two special kinds of selectors: <strong>pseudo-classes</strong> and <strong>pseudo-elements</strong>.
+  </p>
+  <p>
+    The key difference is easy to remember:
+  </p>
+  <ul>
+    <li><strong>Pseudo-class</strong> (written with a <strong>single colon, like <code>:hover</code></strong>) — selects an element in a <em>particular state</em>, or based on its <em>position</em> among its siblings. It styles the whole element but only in certain conditions.</li>
+    <li><strong>Pseudo-element</strong> (written with a <strong>double colon, like <code>::before</code></strong>) — selects a <em>specific part</em> of an element that isn't a real element in the HTML, like the first line, or a decorative bit inserted before/after the content.</li>
+  </ul>
+  <p>
+    Think of it this way: a <strong>pseudo-class</strong> is a <em>condition</em>, while a <strong>pseudo-element</strong> is a <em>piece</em>. A pseudo-class asks "is the button hovered?" A pseudo-element says "insert something before this element's content."
+  </p>
+
+  <!-- 2. SYNTAX -->
+  <h2><span class="num">2</span>Syntax and its Explanation</h2>
+
+  <h3>Pseudo-classes (single colon)</h3>
+  <pre><code><span class="sel">selector:state</span> { <span class="kw">property</span>: <span class="num">value</span>; }</code></pre>
+  <table>
+    <tr><th>Pseudo-class</th><th>Selects</th><th>Example</th></tr>
+    <tr><td><code>:hover</code></td><td>An element the mouse is over.</td><td><code>a:hover { color: red; }</code></td></tr>
+    <tr><td><code>:focus</code></td><td>An element currently focused (clicked/selected, e.g. an input).</td><td><code>input:focus { border: 2px solid blue; }</code></td></tr>
+    <tr><td><code>:nth-child(n)</code></td><td>The <em>nth</em> element among its siblings.</td><td><code>li:nth-child(2) { ... }</code></td></tr>
+    <tr><td><code>:not(sel)</code></td><td>Everything <em>except</em> the given selector.</td><td><code>p:not(.highlight) { ... }</code></td></tr>
+  </table>
+
+  <h3>Pseudo-elements (double colon)</h3>
+  <pre><code><span class="sel">selector::part</span> { <span class="kw">property</span>: <span class="num">value</span>; }</code></pre>
+  <table>
+    <tr><th>Pseudo-element</th><th>Selects</th><th>Example</th></tr>
+    <tr><td><code>::before</code></td><td>Inserts content <em>before</em> an element's content.</td><td><code>p::before { content: "★ "; }</code></td></tr>
+    <tr><td><code>::after</code></td><td>Inserts content <em>after</em> an element's content.</td><td><code>p::after { content: " ★"; }</code></td></tr>
+    <tr><td><code>::first-line</code></td><td>Styles just the first line of a block of text.</td><td><code>p::first-line { font-weight: bold; }</code></td></tr>
+  </table>
+
+  <div class="note">
+    <strong>Key rule:</strong> Pseudo-classes use a <strong>single colon</strong> (<code>:hover</code>) and style a whole element in a certain state. Pseudo-elements use a <strong>double colon</strong> (<code>::before</code>) and style or insert a part of an element. Crucially, <code>::before</code> and <code>::after</code> <strong>require</strong> a <code>content</code> property to be visible.
+  </div>
+
+  <!-- 3. FEATURES & USES -->
+  <h2><span class="num">3</span>Features &amp; Uses</h2>
+
+  <div class="card">
+    <h3>Pseudo-class: :hover</h3>
+    <p>Styles an element when the pointer is over it (mouse hover / touch). Perfect for links, buttons, cards, and menus.</p>
+    <pre><code><span class="kw">a:hover</span> { <span class="kw">color</span>: <span class="str">#047857</span>; <span class="kw">text-decoration</span>: <span class="kw">underline</span>; }
+<span class="kw">button:hover</span> { <span class="kw">background</span>: <span class="str">#065f46</span>; }</code></pre>
+  </div>
+
+  <div class="card">
+    <h3>Pseudo-class: :focus</h3>
+    <p>Styles an element while it has focus (keyboard or click). Excellent for accessible form fields — you can show a clear focus outline.</p>
+    <pre><code><span class="kw">input:focus</span> { <span class="kw">outline</span>: <span class="num">3px</span> <span class="kw">solid</span> <span class="str">#f59e0b</span>; <span class="kw">border-color</span>: <span class="str">#f59e0b</span>; }</code></pre>
+  </div>
+
+  <div class="card">
+    <h3>Pseudo-class: :nth-child()</h3>
+    <p>Targets the <em>nth</em> child among siblings. Useful for zebra striping, highlighting a specific item, or selectors based on position.</p>
+    <pre><code><span class="kw">li:nth-child(2)</span>   { <span class="kw">color</span>: <span class="str">red</span>; }  <span class="comment">// the 2nd li</span>
+<span class="kw">li:nth-child(odd)</span> { <span class="kw">background</span>: <span class="str">#eee</span>; } <span class="comment">// 1st, 3rd, 5th...</span>
+<span class="kw">li:nth-child(even)</span>{ <span class="kw">background</span>: <span class="str">#fff</span>; }</code></pre>
+  </div>
+
+  <div class="card">
+    <h3>Pseudo-class: :not()</h3>
+    <p>Selects everything <em>except</em> what matches the given selector. Great for "style all except the last one" or "except a certain class."</p>
+    <pre><code><span class="kw">p:not(.highlight)</span> { <span class="kw">color</span>: <span class="str">gray</span>; }   <span class="comment">// all p except .highlight</span>
+<span class="kw">li:not(:last-child)</span> { <span class="kw">margin-bottom</span>: <span class="num">8px</span>; }</code></pre>
+  </div>
+
+  <div class="card">
+    <h3>Pseudo-element: ::before and ::after</h3>
+    <p>Inserts decorative or helpful content before/after an element's actual content. They are commonly used for icons, quotes, labels, or separators. Remember: <code>content</code> is required.</p>
+    <pre><code><span class="kw">p::before</span> { <span class="kw">content</span>: <span class="str">"» "</span>; <span class="kw">color</span>: <span class="str">teal</span>; }
+<span class="kw">p::after</span>  { <span class="kw">content</span>: <span class="str">" «"</span>; <span class="kw">color</span>: <span class="str">teal</span>; }</code></pre>
+    <div class="demo">
+      <div class="card-note">This note gets a "TIP:" prefix and an "(end of note)" suffix added by CSS pseudo-elements.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Pseudo-element: ::first-line</h3>
+    <p>Styles only the first line of a block (like a paragraph). Note it only works on block-level elements.</p>
+    <pre><code><span class="kw">p::first-line</span> { <span class="kw">font-weight</span>: <span class="kw">bold</span>; <span class="kw">color</span>: <span class="str">#047857</span>; }</code></pre>
+  </div>
+
+  <div class="tip">
+    <strong>Did you know?</strong> Pseudo-elements can be used to add icons and decoration <em>without</em> any extra HTML. For example, <code>p::before { content: "★"; }</code> adds a star before every paragraph — pure CSS, no extra tags.
+  </div>
+
+  <!-- 4. EXAMPLE PROGRAMS -->
+  <h2><span class="num">4</span>Example Programs with Explanation</h2>
+
+  <!-- Example 1 -->
+  <h3>Example 1 — Pseudo-classes in action</h3>
+  <p>This example uses the four pseudo-classes: <code>:hover</code> on a button and link, <code>:focus</code> on a form-field, <code>:nth-child()</code> for zebra striping a list, and <code>:not()</code> to style everything except the highlighted paragraph.</p>
+
+  <pre><code><span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="val">"en"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+  <span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="val">"UTF-8"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;style&gt;</span>
+    <span class="comment">/* :hover — change when the pointer moves over the element */</span>
+    <span class="kw">button:hover</span> { <span class="kw">background</span>: <span class="str">#065f46</span>; }
+
+    <span class="comment">/* :focus — highlight a focused field with a clear outline */</span>
+    <span class="kw">input:focus</span> { <span class="kw">outline</span>: <span class="num">3px</span> <span class="kw">solid</span> <span class="str">#f59e0b</span>; }
+
+    <span class="comment">/* :nth-child() — zebra stripe a list */</span>
+    <span class="kw">li:nth-child(odd)</span>  { <span class="kw">background</span>: <span class="str">#e4f4ee</span>; }
+    <span class="kw">li:nth-child(even)</span> { <span class="kw">background</span>: <span class="str">#fff</span>; }
+
+    <span class="comment">/* :not() — style everything EXCEPT .highlight */</span>
+    <span class="kw">p:not(.highlight)</span> { <span class="kw">color</span>: <span class="str">gray</span>; }
+
+    <span class="kw">body</span> { <span class="kw">font-family</span>: <span class="str">Arial, sans-serif</span>; }
+  <span class="tag">&lt;/style&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+  <span class="tag">&lt;button</span><span class="tag">&gt;</span>Hover me<span class="tag">&lt;/button&gt;</span>
+  <span class="tag">&lt;br&gt;</span><span class="tag">&lt;br&gt;</span>
+  <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="val">"text"</span> <span class="attr">placeholder</span>=<span class="val">"Click here to focus"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;ul&gt;</span>
+    <span class="tag">&lt;li&gt;</span>Item 1<span class="tag">&lt;/li&gt;</span>
+    <span class="tag">&lt;li&gt;</span>Item 2<span class="tag">&lt;/li&gt;</span>
+    <span class="tag">&lt;li&gt;</span>Item 3<span class="tag">&lt;/li&gt;</span>
+    <span class="tag">&lt;li&gt;</span>Item 4<span class="tag">&lt;/li&gt;</span>
+  <span class="tag">&lt;/ul&gt;</span>
+  <span class="tag">&lt;p&gt;</span>This is normal, grey text.<span class="tag">&lt;/p&gt;</span>
+  <span class="tag">&lt;p</span> <span class="attr">class</span>=<span class="val">"highlight"</span><span class="tag">&gt;</span>This is highlighted, so it stays dark.<span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></code></pre>
+
+  <div class="card">
+    <strong>Explanation of Example 1:</strong>
+    <ul>
+      <li><code>button:hover</code> — darkens the button when the mouse is over it.</li>
+      <li><code>input:focus</code> — adds an orange outline when the field is focused (clicked/tabbed into).</li>
+      <li><code>li:nth-child(odd)</code> / <code>even</code> — creates a zebra-striped list (alternating backgrounds).</li>
+      <li><code>p:not(.highlight)</code> — makes all paragraphs grey <em>except</em> the one with <code>class="highlight"</code>, which stays dark.</li>
+    </ul>
+  </div>
+
+  <!-- Example 2 -->
+  <h3>Example 2 — Pseudo-elements in action</h3>
+  <p>This example shows <code>::before</code> and <code>::after</code> adding a star icon before and after each heading, and <code>::first-line</code> styling the first line of the paragraph in bold and color.</p>
+
+  <pre><code><span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="val">"en"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+  <span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="val">"UTF-8"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;style&gt;</span>
+    <span class="comment">/* ::before — add a star BEFORE each heading's text */</span>
+    <span class="kw">h2::before</span> { <span class="kw">content</span>: <span class="str">"★ "</span>; <span class="kw">color</span>: <span class="str">#047857</span>; }
+
+    <span class="comment">/* ::after — add a label AFTER each heading */</span>
+    <span class="kw">h2::after</span>  { <span class="kw">content</span>: <span class="str">" ◆"</span>; <span class="kw">color</span>: <span class="str">#f59e0b</span>; }
+
+    <span class="comment">/* ::first-line — bold &amp; color the first line of the paragraph */</span>
+    <span class="kw">p::first-line</span> { <span class="kw">font-weight</span>: <span class="kw">bold</span>; <span class="kw">color</span>: <span class="str">#047857</span>; }
+
+    <span class="kw">body</span> { <span class="kw">font-family</span>: <span class="str">Georgia</span>, <span class="kw">serif</span>; }
+  <span class="tag">&lt;/style&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+  <span class="tag">&lt;h2&gt;</span>Section One<span class="tag">&lt;/h2&gt;</span>
+  <span class="tag">&lt;p&gt;</span>This is a long line of text that will wrap onto several lines,
+  and only the first line is colored and bolded by ::first-line.
+  The rest of the paragraph continues in normal text styling.<span class="tag">&lt;/p&gt;</span>
+  <span class="tag">&lt;h2&gt;</span>Section Two<span class="tag">&lt;/h2&gt;</span>
+  <span class="tag">&lt;p&gt;</span>Another paragraph here.<span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></code></pre>
+
+  <div class="card">
+    <strong>Explanation of Example 2:</strong>
+    <ul>
+      <li><code>h2::before</code> inserts "★ " before each heading's text — no extra HTML needed.</li>
+      <li><code>h2::after</code> inserts " ◆" after the heading text, acting as a decorative label.</li>
+      <li><code>p::first-line</code> styles only the first line of the paragraph, letting the rest remain normal.</li>
+      <li>Both pseudo-elements required a <code>content</code> property (except <code>::first-line</code>, which styles existing text).</li>
+    </ul>
+    <div class="run-box">
+      <div class="label">How to try it</div>
+      Copy either example into a file named <code>index.html</code> and open it in a browser. Hover the button, tab into the field, and resize the browser window so Example 2's paragraph wraps — you'll see only the first line change color.
+    </div>
+  </div>
+
+  <!-- 5. ADVANTAGES -->
+  <h2><span class="num">5</span>Advantages</h2>
+  <ul>
+    <li><strong>More dynamic styling:</strong> Pseudo-classes respond to the user's interaction (hover, focus) for a lively feel.</li>
+    <li><strong>No extra HTML:</strong> Pseudo-elements add content and decoration purely in CSS (<code>::before</code>/<code>::after</code>).</li>
+    <li><strong>Cleaner markup:</strong> Express states/structure in CSS rather than adding classes or spans.</li>
+    <li><strong>Better accessibility:</strong> <code>:focus</code> styling makes keyboard navigation clearly visible.</li>
+    <li><strong>Flexible &amp; powerful:</strong> <code>:nth-child()</code> and <code>:not()</code> let you target positions and exclusions precisely.</li>
+    <li><strong>Less repetition:</strong> One rule can cover an entire category of conditions (e.g., all odd rows).</li>
+  </ul>
+
+  <!-- 6. CONCLUSION -->
+  <h2><span class="num">6</span>Conclusion</h2>
+  <p>
+    Pseudo-classes and pseudo-elements let you style conditions and parts of elements that a plain selector can't reach. Use the <strong>single-colon pseudo-classes</strong> — <code>:hover</code>, <code>:focus</code>, <code>:nth-child()</code>, <code>:not()</code> — to target an element <em>based on its state or position</em>. Use the <strong>double-colon pseudo-elements</strong> — <code>::before</code>, <code>::after</code>, <code>::first-line</code> — to <em>insert or style a part</em> of an element.
+  </p>
+  <p>
+    In summary: <strong>pseudo-class = condition, pseudo-element = part.</strong> Master both, and you'll write less HTML, create more polished interactions, and build more accessible pages. As the saying goes: <em>"With pseudo-selectors, CSS reaches parts of the page that HTML never touches."</em>
+  </p>
+
+  <footer>Created with the Arena.ai Agent · CSS Pseudo-classes &amp; Pseudo-elements</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A detailed, beginner-friendly overview of web technologies: client-side vs server-side, and the roles of HTML, CSS, and JavaScript.">
+  <meta name="author" content="Arena.ai Agent">
+  <meta name="keywords" content="web technologies, client-side, server-side, HTML, CSS, JavaScript, frontend, backend">
+  <title>Overview of Web Technologies</title>
+  <style>
+    :root {
+      --ink: #1f2430;
+      --muted: #5b6270;
+      --accent: #2563eb;
+      --accent-soft: #e7effc;
+      --code-bg: #0f172a;
+      --code-ink: #e2e8f0;
+      --border: #e3e7ee;
+      --card: #ffffff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--ink);
+      background: #f6f8fb;
+      line-height: 1.7;
+    }
+    .wrap { max-width: 860px; margin: 0 auto; padding: 32px 20px 80px; }
+    header.hero {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: #fff; border-radius: 16px; padding: 36px 28px; margin-bottom: 28px;
+    }
+    header.hero h1 { margin: 0 0 8px; font-size: 1.9rem; }
+    header.hero p { margin: 0; opacity: 0.92; }
+    .badge {
+      display: inline-block; background: rgba(255,255,255,0.18); border-radius: 999px;
+      padding: 3px 12px; font-size: 0.8rem; margin-top: 14px; letter-spacing: 0.4px;
+    }
+    h2 {
+      font-size: 1.4rem; color: #1d4ed8; border-bottom: 2px solid var(--accent-soft);
+      padding-bottom: 6px; margin-top: 42px;
+    }
+    h2 .num {
+      display: inline-block; width: 28px; height: 28px; line-height: 28px; text-align: center;
+      background: var(--accent); color: #fff; border-radius: 50%; font-size: 0.9rem; margin-right: 10px;
+    }
+    h3 { color: var(--ink); margin-top: 26px; font-size: 1.08rem; }
+    p { margin: 12px 0; }
+    .card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+      padding: 18px 20px; margin: 18px 0; box-shadow: 0 1px 2px rgba(15,23,42,0.03);
+    }
+    pre {
+      background: var(--code-bg); color: var(--code-ink); border-radius: 10px; padding: 16px 18px;
+      overflow-x: auto; font-size: 0.88rem; line-height: 1.55; margin: 14px 0; border-left: 4px solid var(--accent);
+    }
+    code { font-family: "SF Mono", "Cascadia Code", Consolas, Menlo, monospace; }
+    p code, li code, td code {
+      background: var(--accent-soft); color: #1d4ed8; padding: 2px 6px; border-radius: 5px; font-size: 0.88em;
+    }
+    .comment { color: #7c8aa0; font-style: italic; }
+    .tag { color: #7dd3fc; }
+    .attr { color: #fbbf24; }
+    .val { color: #a5f3c4; }
+    .kw { color: #c084fc; }
+    .str { color: #a5f3c4; }
+    .num { color: #fca5a5; }
+    table {
+      width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.92rem; background: #fff;
+      border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
+    }
+    th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    th { background: var(--accent-soft); color: #1d4ed8; }
+    tr:last-child td { border-bottom: none; }
+    ul, ol { padding-left: 22px; }
+    li { margin: 6px 0; }
+    .tip {
+      background: #fff7e6; border-left: 4px solid #f59e0b; padding: 12px 16px; border-radius: 8px;
+      margin: 16px 0; color: #7a4c00;
+    }
+    .note {
+      background: var(--accent-soft); border-left: 4px solid var(--accent); padding: 12px 16px;
+      border-radius: 8px; margin: 16px 0;
+    }
+    .run-box {
+      border: 1px dashed var(--border); border-radius: 10px; padding: 12px 16px; margin-top: 10px; background: #fbfcfe;
+    }
+    .run-box .label { font-size: 0.78rem; letter-spacing: 0.5px; text-transform: uppercase; color: var(--muted); }
+    .two-col { display: flex; gap: 16px; flex-wrap: wrap; }
+    .two-col .card { flex: 1 1 300px; }
+    footer { margin-top: 48px; text-align: center; color: var(--muted); font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <h1>Overview of Web Technologies</h1>
+    <p>Understanding the two halves of the web — client-side vs. server-side — and the roles of HTML, CSS, and JavaScript.</p>
+    <span class="badge">Frontend · Backend · The Web</span>
+  </header>
+
+  <!-- 1. INTRODUCTION -->
+  <h2><span class="num">1</span>Introduction</h2>
+  <p>
+    Every website you have ever visited is a collaboration between <strong>two "sides" of the web</strong>. When you open a web page, your browser (the <em>client</em>) sends a request to a computer (the <em>server</em>) that holds the website's files. The server responds with those files, and your browser then builds the page you see on your screen.
+  </p>
+  <p>
+    This flow gives us two broad categories of web technology:
+  </p>
+  <ul>
+    <li><strong>Client-side (front-end)</strong> — the code that runs <em>in your browser</em>. It is what you see and interact with: layout, colors, buttons, animations.</li>
+    <li><strong>Server-side (back-end)</strong> — the code that runs <em>on the server</em>. It is invisible to you but does the "heavy lifting": reading databases, checking passwords, processing payments, and generating the content the browser needs.</li>
+  </ul>
+  <p>
+    On the client side, three core technologies work together: <strong>HTML</strong> builds the structure, <strong>CSS</strong> controls the appearance, and <strong>JavaScript</strong> adds interactivity. You can think of a website as a house — HTML is the bricks and walls, CSS is the paint and furniture, and JavaScript is the electricity and plumbing that make it "work."
+  </p>
+
+  <!-- 2. SYNTAX -->
+  <h2><span class="num">2</span>Syntax and its Explanation</h2>
+  <p>Each core web technology has its own small, simple syntax. Here is a quick look at the three client-side languages, plus a peek at how the client/server split works.</p>
+
+  <h3>HTML — the structure</h3>
+  <pre><code><span class="comment">&lt;!-- Tags wrap content. Most have an open &amp; closing tag --&gt;</span>
+<span class="tag">&lt;h1&gt;</span>Hello, World!<span class="tag">&lt;/h1&gt;</span>
+<span class="tag">&lt;p&gt;</span>This is a paragraph.<span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;img</span> <span class="attr">src</span>=<span class="val">"photo.jpg"</span> <span class="attr">alt</span>=<span class="val">"A photo"</span><span class="tag">&gt;</span> <span class="comment">&lt;!-- self-closing --&gt;</span></code></pre>
+
+  <h3>CSS — the style</h3>
+  <pre><code><span class="comment">/* Selector { property: value; } */</span>
+<span class="kw">h1</span> { <span class="kw">color</span>: <span class="str">blue</span>; <span class="kw">font-size</span>: <span class="num">24px</span>; }</code></pre>
+
+  <h3>JavaScript — the behaviour</h3>
+  <pre><code><span class="comment">// Variables, functions, and events</span>
+<span class="kw">let</span> name = <span class="str">"Aisha"</span>;
+<span class="kw">function</span> <span class="kw">greet</span>() { <span class="kw">alert</span>(<span class="str">"Hello "</span> + name); }</code></pre>
+
+  <h3>Client-side vs. Server-side at a glance</h3>
+  <table>
+    <tr><th>Property</th><th>Client-side (Front-end)</th><th>Server-side (Back-end)</th></tr>
+    <tr><td>Where it runs</td><td>In the user's browser</td><td>On the web server</td></tr>
+    <tr><td>What the user sees</td><td>Yes — directly visible</td><td>No — invisible</td></tr>
+    <tr><td>Main languages</td><td>HTML, CSS, JavaScript</td><td>PHP, Python, Node.js, Java, Ruby, etc.</td></tr>
+    <tr><td>Typical tasks</td><td>Layout, styling, interactivity</td><td>Databases, logins, business logic</td></tr>
+    <tr><td>Example</td><td>Dropdown menu, form validation</td><td>Saving data, checking a password</td></tr>
+  </table>
+
+  <div class="note">
+    <strong>Key rule:</strong> These two sides always talk to each other. The client asks the server for data, and the server sends back an answer. A complete website normally combines both — no modern site is just HTML alone.
+  </div>
+
+  <!-- 3. FEATURES & USES -->
+  <h2><span class="num">3</span>Features &amp; Uses</h2>
+  <p>Let's look at what each technology is actually good at, and how the two sides divide up the work of a real website.</p>
+
+  <div class="two-col">
+    <div class="card">
+      <h3>HTML — the structure (skeleton)</h3>
+      <p>Defines the <strong>content and meaning</strong> of a page: headings, paragraphs, images, links, lists, forms. It tells the browser <em>what each thing is</em>.</p>
+      <pre><code><span class="tag">&lt;h1&gt;</span>Title<span class="tag">&lt;/h1&gt;</span>
+<span class="tag">&lt;ul&gt;</span><span class="tag">&lt;li&gt;</span>Item<span class="tag">&lt;/li&gt;</span><span class="tag">&lt;/ul&gt;</span></code></pre>
+    </div>
+    <div class="card">
+      <h3>CSS — the style (appearance)</h3>
+      <p>Controls <strong>how the content looks</strong>: colors, fonts, spacing, layout, and responsiveness. Keeps design separate from content.</p>
+      <pre><code><span class="kw">body</span> { <span class="kw">background</span>: <span class="str">#fff</span>; }
+<span class="kw">p</span>   { <span class="kw">color</span>: <span class="str">gray</span>; }</code></pre>
+    </div>
+    <div class="card">
+      <h3>JavaScript — the behaviour (interactivity)</h3>
+      <p>Adds <strong>dynamic behaviour</strong>: responding to clicks, validating forms, making API calls, and updating the page without a full reload.</p>
+      <pre><code><span class="kw">btn</span>.<span class="kw">addEventListener</span>(<span class="str">"click"</span>, () =&gt; { <span class="kw">btn</span>.<span class="kw">style</span>.<span class="kw">color</span> = <span class="str">"red"</span>; });</code></pre>
+    </div>
+    <div class="card">
+      <h3>Server-side — the brain</h3>
+      <p>Handles <strong>data, security, and logic</strong>: storing records, authenticating users, sending emails, and computing results you can't (or shouldn't) do in the browser.</p>
+      <pre><code><span class="kw">const</span> user = <span class="kw">findUser</span>(username);
+<span class="kw">if</span> (user.password === entered) { <span class="kw">login</span>(); }</code></pre>
+    </div>
+  </div>
+
+  <div class="tip">
+    <strong>Did you know?</strong> A single page can contain all three client-side languages, plus a server that supplies the data. Because the client and server are separate, a website can keep working (the page still shows) even if the server's data is slow to arrive.
+  </div>
+
+  <!-- 4. EXAMPLE PROGRAMS -->
+  <h2><span class="num">4</span>Example Programs with Explanation</h2>
+
+  <!-- Example 1 -->
+  <h3>Example 1 — A complete client-side page (HTML + CSS + JS combined)</h3>
+  <p>This example is a small interactive page that uses all three client-side technologies in one file: HTML builds the structure, CSS styles it, and JavaScript makes a button change the page when clicked.</p>
+
+  <pre><code><span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="val">"en"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+  <span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="val">"UTF-8"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;title&gt;</span>My Interactive Page<span class="tag">&lt;/title&gt;</span>
+  <span class="tag">&lt;style&gt;</span>
+    <span class="kw">body</span> { <span class="kw">font-family</span>: <span class="str">Arial</span>; <span class="kw">text-align</span>: <span class="kw">center</span>; }
+    <span class="kw">button</span> { <span class="kw">padding</span>: <span class="num">10px</span> <span class="num">20px</span>; }
+  <span class="tag">&lt;/style&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+
+<span class="tag">&lt;body&gt;</span>
+  <span class="tag">&lt;h1</span> <span class="attr">id</span>=<span class="val">"title"</span><span class="tag">&gt;</span>Click the button!<span class="tag">&lt;/h1&gt;</span>   <span class="comment">&lt;!-- HTML structure --&gt;</span>
+  <span class="tag">&lt;button</span> <span class="attr">id</span>=<span class="val">"btn"</span><span class="tag">&gt;</span>Click Me<span class="tag">&lt;/button&gt;</span>
+
+  <span class="tag">&lt;script&gt;</span>
+    <span class="kw">document</span>.<span class="kw">getElementById</span>(<span class="str">"btn"</span>).<span class="kw">addEventListener</span>(<span class="str">"click"</span>, <span class="kw">function</span>() {
+      <span class="kw">document</span>.<span class="kw">getElementById</span>(<span class="str">"title"</span>).<span class="kw">innerText</span> = <span class="str">"You changed me!"</span>;
+    });
+  <span class="tag">&lt;/script&gt;</span>
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></code></pre>
+
+  <div class="card">
+    <strong>Explanation of Example 1:</strong>
+    <ul>
+      <li><strong>HTML</strong> — creates the structure: a heading and a button.</li>
+      <li><strong>CSS</strong> — styles the page: font, centered text, and button padding.</li>
+      <li><strong>JavaScript</strong> — listens for a click on the button and updates the heading text to <em>"You changed me!"</em>. This interactivity happens entirely in the browser, so no server is involved.</li>
+    </ul>
+  </div>
+
+  <!-- Example 2 -->
+  <h3>Example 2 — A simple server-side example (PHP)</h3>
+  <p>This example shows the <em>server side</em> working. A PHP script runs on the server, reads the current time, and builds HTML that gets sent to the browser. The user never sees the PHP code — only the HTML it produces.</p>
+
+  <pre><code><span class="comment">&lt;?php // This part runs on the SERVER --&gt;</span>
+<span class="kw">&lt;?php</span>
+  <span class="str">$name</span> = <span class="str">"Aisha"</span>;                 <span class="comment">// server-side data</span>
+  <span class="str">$hour</span> = <span class="kw">date</span>(<span class="str">"H"</span>);              <span class="comment">// current hour on server</span>
+  <span class="kw">if</span> (<span class="str">$hour</span> &lt; <span class="num">12</span>) { <span class="str">$greeting</span> = <span class="str">"Good morning"</span>; }
+  <span class="kw">else</span> { <span class="str">$greeting</span> = <span class="str">"Good afternoon"</span>; }
+<span class="kw">?&gt;</span>
+
+<span class="comment">&lt;!-- The browser only ever receives the HTML below --&gt;</span>
+<span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;body</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;h1&gt;</span><span class="kw">&lt;?php</span> <span class="kw">echo</span> <span class="str">$greeting</span> . <span class="str">", "</span> . <span class="str">$name</span>; <span class="kw">?&gt;</span><span class="tag">&lt;/h1&gt;</span>
+  <span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></code></pre>
+
+  <div class="card">
+    <strong>Explanation of Example 2:</strong>
+    <ul>
+      <li>The <code>&lt;?php ... ?&gt;</code> block runs <strong>on the server</strong> before the page is sent.</li>
+      <li>It creates a variable <code>$name</code>, reads the server's current hour, and decides between "Good morning" and "Good afternoon".</li>
+      <li>The server then produces a plain HTML page with the greeting filled in, and sends it to the browser. The browser never sees the PHP — it only sees the resulting HTML. This is the key difference from client-side code.</li>
+    </ul>
+    <div class="run-box">
+      <div class="label">How to try it</div>
+      For Example 1, save it as <code>index.html</code> and open it in a browser — click the button to see the change. For Example 2, you need a server that runs PHP (like XAMPP, WAMP, or an online PHP playground) and save it as <code>index.php</code>.
+    </div>
+  </div>
+
+  <!-- 5. ADVANTAGES -->
+  <h2><span class="num">5</span>Advantages</h2>
+  <ul>
+    <li><strong>Clear division of work:</strong> Splitting client and server keeps each side focused, simple, and easier to maintain.</li>
+    <li><strong>Better user experience:</strong> Client-side code responds instantly to clicks without waiting for the server, making pages feel fast and smooth.</li>
+    <li><strong>Security &amp; control:</strong> Sensitive logic (passwords, payments, data) stays on the server, out of reach of the user's browser.</li>
+    <li><strong>Separation of concerns:</strong> HTML (structure), CSS (style), and JS (behaviour) keep code clean, reusable, and easy for teams to work on independently.</li>
+    <li><strong>Reusable &amp; scalable:</strong> The same front-end can talk to many different back-ends, and vice versa, so systems can grow easily.</li>
+    <li><strong>Accessible &amp; indexable:</strong> Semantic HTML and server-rendered content work well for screen readers and search engines.</li>
+  </ul>
+
+  <!-- 6. CONCLUSION -->
+  <h2><span class="num">6</span>Conclusion</h2>
+  <p>
+    Understanding the web as two connected halves — the <strong>client</strong> (your browser) and the <strong>server</strong> — is the foundation of all web development. The client side, built from HTML, CSS, and JavaScript, is responsible for everything the user sees and touches. The server side, built from languages like PHP, Python, or Node.js, is responsible for the data, security, and logic that make a site genuinely useful.
+  </p>
+  <p>
+    In summary: <strong>HTML provides the structure, CSS provides the style, and JavaScript provides the behaviour</strong> — all running on the client. The server supplies the behind-the-scenes power. A real-world website combines both sides working together in a constant exchange of requests and responses. Master this mental model, and every other concept in web development will fall into place. Quoting the common phrase: <em>"The client shows, the server knows."</em>
+  </p>
+
+  <footer>Created with the Arena.ai Agent · Overview of Web Technologies</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A detailed, beginner-friendly guide to CSS selectors — element, class, id, attribute, combinators (descendant, child, sibling), and universal — with syntax and examples.">
+  <meta name="author" content="Arena.ai Agent">
+  <meta name="keywords" content="CSS selectors, element selector, class selector, id selector, attribute selector, descendant combinator, child combinator, sibling combinator, universal selector">
+  <title>Types of CSS Selectors</title>
+  <style>
+    :root { --ink:#1f2430; --muted:#5b6270; --accent:#0f766e; --accent-soft:#e6f4f2; --code-bg:#0f172a; --code-ink:#e2e8f0; --border:#e3e7ee; --card:#ffffff; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; color:var(--ink); background:#f6f8fb; line-height:1.7; }
+    .wrap { max-width:860px; margin:0 auto; padding:32px 20px 80px; }
+    header.hero { background:linear-gradient(135deg,#0f766e,#115e59); color:#fff; border-radius:16px; padding:36px 28px; margin-bottom:28px; }
+    header.hero h1 { margin:0 0 8px; font-size:1.9rem; }
+    header.hero p { margin:0; opacity:0.92; }
+    .badge { display:inline-block; background:rgba(255,255,255,0.18); border-radius:999px; padding:3px 12px; font-size:0.8rem; margin-top:14px; letter-spacing:0.4px; }
+    h2 { font-size:1.4rem; color:#115e59; border-bottom:2px solid var(--accent-soft); padding-bottom:6px; margin-top:42px; }
+    h2 .num { display:inline-block; width:28px; height:28px; line-height:28px; text-align:center; background:var(--accent); color:#fff; border-radius:50%; font-size:0.9rem; margin-right:10px; }
+    h3 { color:var(--ink); margin-top:26px; font-size:1.08rem; }
+    p { margin:12px 0; }
+    .card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:18px 20px; margin:18px 0; box-shadow:0 1px 2px rgba(15,23,42,0.03); }
+    pre { background:var(--code-bg); color:var(--code-ink); border-radius:10px; padding:16px 18px; overflow-x:auto; font-size:0.88rem; line-height:1.55; margin:14px 0; border-left:4px solid var(--accent); }
+    code { font-family:"SF Mono","Cascadia Code",Consolas,Menlo,monospace; }
+    p code, li code, td code { background:var(--accent-soft); color:#115e59; padding:2px 6px; border-radius:5px; font-size:0.88em; }
+    .comment { color:#7c8aa0; font-style:italic; }
+    .kw { color:#c084fc; }
+    .str { color:#a5f3c4; }
+    .num { color:#fca5a5; }
+    .sel { color:#7dd3fc; }
+    .table-css { width:100%; border-collapse:collapse; margin:16px 0; font-size:0.92rem; background:#fff; border:1px solid var(--border); border-radius:10px; overflow:hidden; }
+    .table-css th,.table-css td { text-align:left; padding:10px 12px; border-bottom:1px solid var(--border); }
+    .table-css th { background:var(--accent-soft); color:#115e59; }
+    .table-css tr:last-child td { border-bottom:none; }
+    ul,ol { padding-left:22px; }
+    li { margin:6px 0; }
+    .tip { background:#fff7e6; border-left:4px solid #f59e0b; padding:12px 16px; border-radius:8px; margin:16px 0; color:#7a4c00; }
+    .note { background:var(--accent-soft); border-left:4px solid var(--accent); padding:12px 16px; border-radius:8px; margin:16px 0; }
+    .run-box { border:1px dashed var(--border); border-radius:10px; padding:12px 16px; margin-top:10px; background:#fbfcfe; }
+    .run-box .label { font-size:0.78rem; letter-spacing:0.5px; text-transform:uppercase; color:var(--muted); }
+    .demo { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:18px 20px; margin:18px 0; }
+    .demo h1, .demo h2, .demo p { margin:4px 0; }
+    .demo ul { margin:8px 0; }
+    footer { margin-top:48px; text-align:center; color:var(--muted); font-size:0.85rem; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <h1>Types of CSS Selectors</h1>
+    <p>A complete guide to element, class, id, attribute, combinator, and universal selectors — with syntax and examples.</p>
+    <span class="badge">CSS · Selectors · Styling</span>
+  </header>
+
+  <!-- 1. INTRODUCTION -->
+  <h2><span class="num">1</span>Introduction</h2>
+  <p>
+    A <strong>CSS selector</strong> is the part of a CSS rule that <em>selects</em> which HTML elements to style. It is how you say "make every heading blue" or "style only the first paragraph." Without selectors, CSS would have no way of knowing which parts of a page to apply rules to.
+  </p>
+  <p>
+    A CSS rule has two parts:
+  </p>
+  <pre><code><span class="kw">selector</span> {
+  <span class="kw">property</span>: <span class="num">value</span>;
+}</code></pre>
+  <p>
+    The <strong>selector</strong> targets elements, and the <strong>declaration block</strong> (inside the curly braces) tells the browser what to change about them. This guide covers the most important selector types you'll use every day.
+  </p>
+  <ul>
+    <li><strong>Element selectors</strong> — by tag name.</li>
+    <li><strong>Class selectors</strong> — by a class attribute.</li>
+    <li><strong>ID selectors</strong> — by an id attribute.</li>
+    <li><strong>Attribute selectors</strong> — by an attribute or its value.</li>
+    <li><strong>Combinators</strong> — descendant, child, and sibling.</li>
+    <li><strong>Universal selector</strong> — everything.</li>
+  </ul>
+
+  <!-- 2. SYNTAX -->
+  <h2><span class="num">2</span>Syntax and its Explanation</h2>
+  <p>Here is each selector with its basic syntax and a quick example.</p>
+
+  <table class="table-css">
+    <tr><th>Selector type</th><th>Syntax</th><th>Example</th><th>Targets</th></tr>
+    <tr><td>Element</td><td><code>element</code></td><td><code>p</code></td><td>All <code>&lt;p&gt;</code> elements</td></tr>
+    <tr><td>Class</td><td><code>.class</code></td><td><code>.box</code></td><td>All elements with class="box"</td></tr>
+    <tr><td>ID</td><td><code>#id</code></td><td><code>#header</code></td><td>The element with id="header"</td></tr>
+    <tr><td>Attribute</td><td><code>[attr]</code>, <code>[attr=val]</code></td><td><code>[type="email"]</code></td><td>Elements that have the attribute/value</td></tr>
+    <tr><td>Universal</td><td><code>*</code></td><td><code>*</code></td><td>Every element</td></tr>
+    <tr><td>Descendant</td><td><code>A B</code> (space)</td><td><code>div p</code></td><td>A <code>&lt;p&gt;</code> anywhere inside a <code>&lt;div&gt;</code></td></tr>
+    <tr><td>Child</td><td><code>A &gt; B</code></td><td><code>ul &gt; li</code></td><td>Direct child <code>&lt;li&gt;</code> of a <code>&lt;ul&gt;</code></td></tr>
+    <tr><td>General sibling</td><td><code>A ~ B</code></td><td><code>h1 ~ p</code></td><td><code>&lt;p&gt;</code> that comes after an <code>&lt;h1&gt;</code></td></tr>
+    <tr><td>Adjacent sibling</td><td><code>A + B</code></td><td><code>h1 + p</code></td><td>The <code>&lt;p&gt;</code> immediately after an <code>&lt;h1&gt;</code></td></tr>
+  </table>
+
+  <div class="note">
+    <strong>Key rule:</strong> A selector's "specificity" matters. If two rules conflict, the one with higher specificity wins. In general, <code>id</code> &gt; <code>class</code> &gt; <code>element</code>, and combinators/attribute selectors fall roughly between class and element. The <code>*</code> universal selector has the lowest specificity.
+  </div>
+
+  <!-- 3. FEATURES & USES -->
+  <h2><span class="num">3</span>Features &amp; Uses</h2>
+
+  <div class="card">
+    <h3>1. Element selector — by tag name</h3>
+    <p>Selects every element of a given type. Great for setting default styling for a whole tag (e.g., all headings or all links).</p>
+    <pre><code><span class="kw">h2</span>  { <span class="kw">color</span>: <span class="str">teal</span>; }
+<span class="kw">p</span>   { <span class="kw">line-height</span>: <span class="num">1.6</span>; }
+<span class="kw">a</span>   { <span class="kw">text-decoration</span>: <span class="kw">none</span>; }</code></pre>
+  </div>
+
+  <div class="card">
+    <h3>2. Class selector — the most common</h3>
+    <p>Selects elements that share a class. A class can be reused on many elements, making it the most flexible and widely-used selector.</p>
+    <pre><code><span class="comment">&lt;!-- HTML --&gt;</span>
+<span class="kw">&lt;p</span> <span class="kw">class</span>=<span class="str">"highlight"</span><span class="kw">&gt;</span>Hello<span class="kw">&lt;/p&gt;</span>
+<span class="kw">&lt;p</span> <span class="kw">class</span>=<span class="str">"highlight"</span><span class="kw">&gt;</span>World<span class="kw">&lt;/p&gt;</span>
+
+<span class="comment">/* CSS */</span>
+<span class="kw">.highlight</span> { <span class="kw">background</span>: <span class="str">yellow</span>; }</code></pre>
+  </div>
+
+  <div class="card">
+    <h3>3. ID selector — one unique element</h3>
+    <p>Selects a single, unique element (an id can only be used once per page). Useful for targeting one special element like a header, footer, or the main container.</p>
+    <pre><code><span class="comment">&lt;!-- HTML --&gt;</span>
+<span class="kw">&lt;div</span> <span class="kw">id</span>=<span class="str">"main"</span><span class="kw">&gt;</span>Content<span class="kw">&lt;/div&gt;</span>
+
+<span class="comment">/* CSS */</span>
+<span class="kw">#main</span> { <span class="kw">max-width</span>: <span class="num">800px</span>; <span class="kw">margin</span>: <span class="kw">auto</span>; }</code></pre>
+  </div>
+
+  <div class="card">
+    <h3>4. Attribute selector — by an attribute</h3>
+    <p>Selects elements based on an attribute, its value, or part of its value. Useful for styling inputs of a certain type, or links with a specific attribute.</p>
+    <pre><code><span class="kw">input[type="email"]</span>   { <span class="kw">border</span>: <span class="num">2px</span> <span class="kw">solid</span> <span class="str">teal</span>; }
+<span class="kw">a[href^="https"]</span>        { <span class="kw">color</span>: <span class="str">green</span>; }  <span class="comment">// href starts with https</span></code></pre>
+  </div>
+
+  <div class="card">
+    <h3>5. Descendant combinator (space)</h3>
+    <p>Selects an element that is <em>anywhere inside</em> another element, at any level of nesting.</p>
+    <pre><code><span class="comment">/* Select any p inside a div, even nested deep */</span>
+<span class="kw">div p</span> { <span class="kw">font-size</span>: <span class="num">18px</span>; }</code></pre>
+  </div>
+
+  <div class="card">
+    <h3>6. Child combinator (&gt;)</h3>
+    <p>Selects an element that is a <em>direct</em> child of another — not a deeper grandchild.</p>
+    <pre><code><span class="comment">/* Only the li that are DIRECT children of ul */</span>
+<span class="kw">ul &gt; li</span>   { <span class="kw">list-style</span>: <span class="kw">none</span>; }</code></pre>
+  </div>
+
+  <div class="card">
+    <h3>7. Sibling combinators (~ and +)</h3>
+    <p>Select elements on the same level (sharing the same parent).</p>
+    <pre><code><span class="comment">/* General sibling: any p after an h1 */</span>
+<span class="kw">h1 ~ p</span> { <span class="kw">color</span>: <span class="str">gray</span>; }
+
+<span class="comment">/* Adjacent sibling: the p immediately after an h1 */</span>
+<span class="kw">h1 + p</span> { <span class="kw">font-weight</span>: <span class="kw">bold</span>; }</code></pre>
+  </div>
+
+  <div class="card">
+    <h3>8. Universal selector (*)</h3>
+    <p>Selects every element on the page. Commonly used for quick resets, such as removing default margins and padding.</p>
+    <pre><code><span class="comment">/* A common reset */</span>
+<span class="kw">*</span> { <span class="kw">margin</span>: <span class="num">0</span>; <span class="kw">padding</span>: <span class="num">0</span>; <span class="kw">box-sizing</span>: <span class="kw">border-box</span>; }</code></pre>
+  </div>
+
+  <div class="tip">
+    <strong>Did you know?</strong> You can combine selectors by using a comma, e.g. <code>h1, h2, h3 { font-weight: bold; }</code> applies the rule to all three at once — this is called a <em>selector list</em>.
+  </div>
+
+  <!-- 4. EXAMPLE PROGRAMS -->
+  <h2><span class="num">4</span>Example Programs with Explanation</h2>
+
+  <!-- Example 1 -->
+  <h3>Example 1 — A page demonstrating every selector type</h3>
+  <p>This example applies every selector we learned in one file. Open it and notice which parts of the page get styled by each rule.</p>
+
+  <pre><code><span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="val">"en"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+  <span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="val">"UTF-8"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;style&gt;</span>
+    <span class="comment">/* Universal: apply to everything */</span>
+    <span class="kw">*</span> { <span class="kw">box-sizing</span>: <span class="kw">border-box</span>; }
+
+    <span class="comment">/* Element selectors */</span>
+    <span class="kw">h2</span>   { <span class="kw">color</span>: <span class="str">#0f766e</span>; }
+    <span class="kw">p</span>    { <span class="kw">line-height</span>: <span class="num">1.6</span>; }
+
+    <span class="comment">/* Class selector */</span>
+    <span class="kw">.box</span> { <span class="kw">padding</span>: <span class="num">10px</span>; <span class="kw">border</span>: <span class="num">1px</span> <span class="kw">solid</span> <span class="str">#ccc</span>; }
+
+    <span class="comment">/* ID selector */</span>
+    <span class="kw">#main</span> { <span class="kw">max-width</span>: <span class="num">600px</span>; <span class="kw">margin</span>: <span class="kw">auto</span>; }
+
+    <span class="comment">/* Attribute selector */</span>
+    <span class="kw">input[type="email"]</span> { <span class="kw">border</span>: <span class="num">2px</span> <span class="kw">solid</span> <span class="str">teal</span>; }
+
+    <span class="comment">/* Descendant: p inside #main */</span>
+    <span class="kw">#main p</span> { <span class="kw">color</span>: <span class="str">#444</span>; }
+
+    <span class="comment">/* Child combinator */</span>
+    <span class="kw">ul &gt; li</span> { <span class="kw">list-style</span>: <span class="kw">none</span>; }
+
+    <span class="comment">/* Adjacent sibling */</span>
+    <span class="kw">h2 + p</span> { <span class="kw">font-weight</span>: <span class="kw">bold</span>; }
+  <span class="tag">&lt;/style&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">id</span>=<span class="val">"main"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;h2&gt;</span>Title<span class="tag">&lt;/h2&gt;</span>
+    <span class="tag">&lt;p&gt;</span>This paragraph is bold (adjacent to h2).<span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;p</span> <span class="attr">class</span>=<span class="val">"box"</span><span class="tag">&gt;</span>This has the .box class.<span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="val">"email"</span> <span class="attr">placeholder</span>=<span class="val">"Email"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;ul&gt;</span><span class="tag">&lt;li&gt;</span>Item 1<span class="tag">&lt;/li&gt;</span><span class="tag">&lt;li&gt;</span>Item 2<span class="tag">&lt;/li&gt;</span><span class="tag">&lt;/ul&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></code></pre>
+
+  <div class="card">
+    <strong>Explanation of Example 1:</strong>
+    <ul>
+      <li><code>*</code> sets <code>box-sizing</code> on everything.</li>
+      <li><code>h2</code> and <code>p</code> are <strong>element</strong> selectors.</li>
+      <li><code>.box</code> is a <strong>class</strong> selector (applies to the paragraph with <code>class="box"</code>).</li>
+      <li><code>#main</code> is an <strong>id</strong> selector (the outer container).</li>
+      <li><code>input[type="email"]</code> is an <strong>attribute</strong> selector.</li>
+      <li><code>#main p</code> is a <strong>descendant</strong> selector.</li>
+      <li><code>ul &gt; li</code> is a <strong>child</strong> selector removing bullets.</li>
+      <li><code>h2 + p</code> is an <strong>adjacent sibling</strong> selector making that first paragraph bold.</li>
+    </ul>
+  </div>
+
+  <!-- Example 2 -->
+  <h3>Example 2 — Styling a layout with combinators</h3>
+  <p>This example focuses on combinators. It builds a simple card layout and uses descendants, child, and sibling selectors to style the structure cleanly.</p>
+
+  <pre><code><span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="val">"en"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+  <span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="val">"UTF-8"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;style&gt;</span>
+    <span class="comment">/* Descendant: style the title inside a card */</span>
+    <span class="kw">.card h2</span>  { <span class="kw">margin</span>: <span class="num">0</span>; <span class="kw">font-size</span>: <span class="num">20px</span>; }
+
+    <span class="comment">/* Child: give each direct card its own rule via the container */</span>
+    <span class="kw">.cards &gt; .card</span> { <span class="kw">background</span>: <span class="str">#f6f8fb</span>; <span class="kw">padding</span>: <span class="num">16px</span>; }
+
+    <span class="comment">/* General sibling: grey the paragraphs that follow a heading */</span>
+    <span class="kw">.card h2 ~ p</span> { <span class="kw">color</span>: <span class="str">#666</span>; }
+
+    <span class="comment">/* Adjacent sibling: space between heading and first paragraph */</span>
+    <span class="kw">.card h2 + p</span> { <span class="kw">margin-top</span>: <span class="num">8px</span>; }
+  <span class="tag">&lt;/style&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="val">"cards"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="val">"card"</span><span class="tag">&gt;</span>
+      <span class="tag">&lt;h2&gt;</span>Card One<span class="tag">&lt;/h2&gt;</span>
+      <span class="tag">&lt;p&gt;</span>This is the first paragraph.<span class="tag">&lt;/p&gt;</span>
+      <span class="tag">&lt;p&gt;</span>Second paragraph, greyed by `~`.<span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="val">"card"</span><span class="tag">&gt;</span>
+      <span class="tag">&lt;h2&gt;</span>Card Two<span class="tag">&lt;/h2&gt;</span>
+      <span class="tag">&lt;p&gt;</span>Second card content.<span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></code></pre>
+
+  <div class="card">
+    <strong>Explanation of Example 2:</strong>
+    <ul>
+      <li><code>.card h2</code> — a <strong>descendant</strong> selector styling the heading inside each card.</li>
+      <li><code>.cards &gt; .card</code> — a <strong>child</strong> selector applying the background to direct card children only.</li>
+      <li><code>.card h2 ~ p</code> — a <strong>general sibling</strong> selector greying all paragraphs that follow a heading.</li>
+      <li><code>.card h2 + p</code> — an <strong>adjacent sibling</strong> selector adding space to the paragraph right after the heading.</li>
+    </ul>
+    <div class="run-box">
+      <div class="label">How to try it</div>
+      Copy either example into a file named <code>index.html</code> and open it in a browser. Remember, this validates the CSS, and you can open DevTools (F12) to inspect which rule is applied to each element. Change a selector and refresh to see the effect.
+    </div>
+  </div>
+
+  <!-- 5. ADVANTAGES -->
+  <h2><span class="num">5</span>Advantages</h2>
+  <ul>
+    <li><strong>Precise targeting:</strong> Selectors let you style exactly what you want — one element, a group, or a special case.</li>
+    <li><strong>Less HTML, more CSS:</strong> You can style many elements without adding classes/ids to each one.</li>
+    <li><strong>Cleaner, maintainable code:</strong> Well-chosen selectors reduce repetition and make styles easier to update.</li>
+    <li><strong>Powerful structure control:</strong> Combinators (descendant, child, sibling) let you style based on the document's hierarchy.</li>
+    <li><strong>Reusable styles:</strong> Classes and attribute selectors allow the same styling to apply across many elements.</li>
+    <li><strong>Standard &amp; widely supported:</strong> All of these are core CSS and work in every modern browser.</li>
+  </ul>
+
+  <!-- 6. CONCLUSION -->
+  <h2><span class="num">6</span>Conclusion</h2>
+  <p>
+    CSS selectors are the bridge between your HTML and your styles. From the simple <strong>element</strong> selector, through <strong>class</strong> and <strong>id</strong>, to the more advanced <strong>attribute</strong>, <strong>combinator</strong> (descendant, child, sibling), and <strong>universal</strong> selectors — each gives you a different way to target the parts of a page you want to style.
+  </p>
+  <p>
+    In summary: <strong>use <code>element</code> for defaults, <code>.class</code> for reusable groups, <code>#id</code> for one-off elements, <code>[attribute]</code> for attributes, combinators for structure, and <code>*</code> for resets.</strong> Mastering these, along with understanding specificity, makes you a confident and efficient CSS author. As the saying goes: <em>"If you can select it, you can style it."</em>
+  </p>
+
+  <footer>Created with the Arena.ai Agent · Types of CSS Selectors</footer>
+</div>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a349893f6cdf7f49',t:'MTc4ODMyMDg3NQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v3d52b47920f24c319d37e2661827c42b1787588026925" integrity="sha512-d9sL6GJLXn6fInD1+TVXhTcQOsmxeHfmHAvwGDIxp5TO+uo1fiWW7mHomMj4MLRlCsJDTqXzWLHJFFlPCEIj/A==" data-cf-beacon='{"version":"2024.11.0","token":"1954b47c125f43f8b4338b3c4f804e4f"}' crossorigin="anonymous"></script>
+</body>
+</html>

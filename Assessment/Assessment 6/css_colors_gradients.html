@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A detailed, beginner-friendly guide to CSS colors — named, hex, rgb, hsl — background properties, and linear &amp; radial gradients with examples.">
+  <meta name="author" content="Arena.ai Agent">
+  <meta name="keywords" content="CSS colors, named colors, hex, rgb, hsl, background properties, linear gradient, radial gradient">
+  <title>CSS Colors, Backgrounds &amp; Gradients</title>
+  <style>
+    :root { --ink:#1f2430; --muted:#5b6270; --accent:#db2777; --accent-soft:#fce3ee; --code-bg:#0f172a; --code-ink:#e2e8f0; --border:#e3e7ee; --card:#ffffff; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; color:var(--ink); background:#f6f8fb; line-height:1.7; }
+    .wrap { max-width:860px; margin:0 auto; padding:32px 20px 80px; }
+    header.hero { background:linear-gradient(135deg,#db2777,#be185d); color:#fff; border-radius:16px; padding:36px 28px; margin-bottom:28px; }
+    header.hero h1 { margin:0 0 8px; font-size:1.9rem; }
+    header.hero p { margin:0; opacity:0.92; }
+    .badge { display:inline-block; background:rgba(255,255,255,0.18); border-radius:999px; padding:3px 12px; font-size:0.8rem; margin-top:14px; letter-spacing:0.4px; }
+    h2 { font-size:1.4rem; color:#be185d; border-bottom:2px solid var(--accent-soft); padding-bottom:6px; margin-top:42px; }
+    h2 .num { display:inline-block; width:28px; height:28px; line-height:28px; text-align:center; background:var(--accent); color:#fff; border-radius:50%; font-size:0.9rem; margin-right:10px; }
+    h3 { color:var(--ink); margin-top:26px; font-size:1.08rem; }
+    p { margin:12px 0; }
+    .card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:18px 20px; margin:18px 0; box-shadow:0 1px 2px rgba(15,23,42,0.03); }
+    pre { background:var(--code-bg); color:var(--code-ink); border-radius:10px; padding:16px 18px; overflow-x:auto; font-size:0.88rem; line-height:1.55; margin:14px 0; border-left:4px solid var(--accent); }
+    code { font-family:"SF Mono","Cascadia Code",Consolas,Menlo,monospace; }
+    p code, li code, td code { background:var(--accent-soft); color:#be185d; padding:2px 6px; border-radius:5px; font-size:0.88em; }
+    .comment { color:#7c8aa0; font-style:italic; }
+    .kw { color:#c084fc; }
+    .str { color:#a5f3c4; }
+    .num { color:#fca5a5; }
+    table { width:100%; border-collapse:collapse; margin:16px 0; font-size:0.92rem; background:#fff; border:1px solid var(--border); border-radius:10px; overflow:hidden; }
+    th,td { text-align:left; padding:10px 12px; border-bottom:1px solid var(--border); }
+    th { background:var(--accent-soft); color:#be185d; }
+    tr:last-child td { border-bottom:none; }
+    ul,ol { padding-left:22px; }
+    li { margin:6px 0; }
+    .tip { background:#fff7e6; border-left:4px solid #f59e0b; padding:12px 16px; border-radius:8px; margin:16px 0; color:#7a4c00; }
+    .note { background:var(--accent-soft); border-left:4px solid var(--accent); padding:12px 16px; border-radius:8px; margin:16px 0; }
+    .run-box { border:1px dashed var(--border); border-radius:10px; padding:12px 16px; margin-top:10px; background:#fbfcfe; }
+    .run-box .label { font-size:0.78rem; letter-spacing:0.5px; text-transform:uppercase; color:var(--muted); }
+    .swatch { display:grid; grid-template-columns:repeat(auto-fill,minmax(120px,1fr)); gap:12px; margin:16px 0; }
+    .swatch div { border-radius:8px; height:70px; display:flex; align-items:flex-end; padding:6px; color:#fff; font-size:0.75rem; text-shadow:0 1px 2px rgba(0,0,0,0.5); }
+    .gradient-box { height:110px; border-radius:8px; margin:14px 0; }
+    footer { margin-top:48px; text-align:center; color:var(--muted); font-size:0.85rem; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <h1>CSS Colors, Backgrounds &amp; Gradients</h1>
+    <p>A complete guide to color notations, background properties, and linear &amp; radial gradients — with examples.</p>
+    <span class="badge">CSS · Colors · Gradients</span>
+  </header>
+
+  <!-- 1. INTRODUCTION -->
+  <h2><span class="num">1</span>Introduction</h2>
+  <p>
+    Color is one of the most powerful design tools in CSS. It can set the mood of a page, highlight important elements, and guide the user's eye. CSS gives you several ways to <em>describe</em> the same color, plus full control over backgrounds and gradients.
+  </p>
+  <p>
+    There are four common <strong>color notations</strong>:
+  </p>
+  <ul>
+    <li><strong>Named colors</strong> — a set of predefined names like <code>red</code>, <code>teal</code>, <code>gold</code> (about 140 of them).</li>
+    <li><strong>Hex codes</strong> — a six-digit code starting with <code>#</code>, like <code>#ff5733</code>.</li>
+    <li><strong>rgb()</strong> — red, green, blue values, each 0–255, like <code>rgb(255, 87, 51)</code>.</li>
+    <li><strong>hsl()</strong> — hue, saturation, lightness, like <code>hsl(9, 100%, 60%)</code>.</li>
+  </ul>
+  <p>
+    Beyond colors, you can style an element's <strong>background</strong> (color, image, position, size, repeat) and even create smooth transitions between colors using <strong>gradients</strong> — linear or radial. Together these let you build visually rich, professional-looking pages.
+  </p>
+
+  <!-- 2. SYNTAX -->
+  <h2><span class="num">2</span>Syntax and its Explanation</h2>
+
+  <h3>The four color notations</h3>
+  <table>
+    <tr><th>Notation</th><th>Syntax</th><th>Example</th><th>How it works</th></tr>
+    <tr><td>Named</td><td><code>color-name</code></td><td><code>teal</code></td><td>Uses a predefined constant name.</td></tr>
+    <tr><td>Hex</td><td><code>#RGB</code> or <code>#RRGGBB</code></td><td><code>#0f766e</code></td><td>Two hex digits each for red, green, blue (00–ff).</td></tr>
+    <tr><td>rgb</td><td><code>rgb(r, g, b)</code> / <code>rgba(r,g,b,a)</code></td><td><code>rgb(15, 118, 110)</code></td><td>Numbers 0–255 for red, green, blue; optional alpha 0–1.</td></tr>
+    <tr><td>hsl</td><td><code>hsl(h, s%, l%)</code> / <code>hsla(...)</code></td><td><code>hsl(174, 78%, 26%)</code></td><td>Hue 0–360 (image of a wheel), saturation &amp; lightness percentages.</td></tr>
+  </table>
+
+  <div class="swatch">
+    <div style="background:#0f766e">teal</div>
+    <div style="background:#ff5733">#ff5733</div>
+    <div style="background:rgb(255,215,0)">rgb(255,215,0)</div>
+    <div style="background:hsl(200,70%,40%)">hsl(200,70%,40%)</div>
+  </div>
+
+  <h3>Background properties</h3>
+  <pre><code><span class="kw">background-color</span>:<span class="str">#ff5733</span>;
+<span class="kw">background-image</span>:<span class="kw">url</span>(<span class="str">"bg.jpg"</span>);
+<span class="kw">background-repeat</span>: <span class="kw">no-repeat</span>;   <span class="comment">// or repeat, repeat-x, repeat-y</span>
+<span class="kw">background-position</span>: <span class="kw">center</span>;
+<span class="kw">background-size</span>: <span class="kw">cover</span>;
+<span class="kw">background</span>: <span class="str">#0f766e</span> <span class="kw">url</span>(<span class="str">"bg.jpg"</span>) <span class="kw">no-repeat</span> <span class="kw">center</span>;</code></pre>
+
+  <h3>Gradients</h3>
+  <pre><code><span class="comment">/* Linear gradient: colors go in a straight line */</span>
+<span class="kw">background</span>: <span class="kw">linear-gradient</span>(<span class="str">red</span>, <span class="str">blue</span>);
+<span class="kw">background</span>: <span class="kw">linear-gradient</span>(<span class="num">45deg</span>, <span class="str">#ff5733</span>, <span class="str">#ffc300</span>);
+
+<span class="comment">/* Radial gradient: colors spread out from a center point */</span>
+<span class="kw">background</span>: <span class="kw">radial-gradient</span>(<span class="kw">circle</span>, <span class="str">#fff</span>, <span class="str">#0f766e</span>);</code></pre>
+
+  <div class="note">
+    <strong>Key rule:</strong> All four notations can produce the <em>exact same</em> color — it's just a different way of writing it. Choose the notation that is clearest in context: named colors for readability, hex for precision, rgb for numbers, and hsl for adjusting lightness/hue easily.
+  </div>
+
+  <!-- 3. FEATURES & USES -->
+  <h2><span class="num">3</span>Features &amp; Uses</h2>
+
+  <div class="card">
+    <h3>1. Named colors — simple &amp; readable</h3>
+    <p>Perfect for quick, understandable styles. There are about 140 supported names (including <code>transparent</code>).</p>
+    <pre><code><span class="kw">h1</span> { <span class="kw">color</span>: <span class="str">tomato</span>; }
+<span class="kw">.box</span> { <span class="kw">background-color</span>: <span class="str">lightgray</span>; }</code></pre>
+  </div>
+
+  <div class="card">
+    <h3>2. Hex colors — the most common in design</h3>
+    <p>A 6-digit code (or 3-digit shorthand) for precise control. Each pair of digits is red, green, blue in hexadecimal (00–ff, i.e. 0–255). You can also add two more digits for alpha (opacity).</p>
+    <pre><code><span class="kw">body</span> { <span class="kw">background-color</span>: <span class="str">#f6f8fb</span>; }
+<span class="kw">h2</span>  { <span class="kw">color</span>: <span class="str">#0f766e</span>; }
+<span class="kw">button</span> { <span class="kw">background</span>: <span class="str">#ff5733</span>; <span class="kw">color</span>: <span class="str">#ffffffcc</span>; }</code></pre>
+  </div>
+
+  <div class="card">
+    <h3>3. rgb() — values as numbers</h3>
+    <p>Red, green, blue each from 0 to 255. Adding a fourth value (alpha) makes the color semi-transparent.</p>
+    <pre><code><span class="kw">p</span> { <span class="kw">color</span>: <span class="kw">rgb</span>(<span class="num">15</span>, <span class="num">118</span>, <span class="num">110</span>); }
+<span class="kw">.overlay</span> { <span class="kw">background</span>: <span class="kw">rgba</span>(<span class="num">0</span>, <span class="num">0</span>, <span class="num">0</span>, <span class="num">0.5</span>); }  <span class="comment">// 50% black</span></code></pre>
+  </div>
+
+  <div class="card">
+    <h3>4. hsl() — easiest to tweak</h3>
+    <p>Hue is an angle on the colour wheel (0–360), saturation and lightness are percentages. Because lightness is separate, it's very easy to darken or lighten a color just by changing <code>l%</code>.</p>
+    <pre><code><span class="kw">h1</span> { <span class="kw">color</span>: <span class="kw">hsl</span>(<span class="num">174</span>, <span class="num">78%</span>, <span class="num">26%</span>); }  <span class="comment">// teal</span>
+
+<span class="kw">h2</span> { <span class="kw">color</span>: <span class="kw">hsl</span>(<span class="num">9</span>, <span class="num">100%</span>, <span class="num">50%</span>); }</code></pre>
+  </div>
+
+  <div class="card">
+    <h3>5. Background properties</h3>
+    <p>Style the area behind an element — its color, and optionally a background image with control over repeat, position, and size.</p>
+    <pre><code><span class="kw">.hero</span> {
+  <span class="kw">background-color</span>: <span class="str">#0f766e</span>;
+  <span class="kw">background-image</span>: <span class="kw">url</span>(<span class="str">"banner.jpg"</span>);
+  <span class="kw">background-repeat</span>: <span class="kw">no-repeat</span>;
+  <span class="kw">background-position</span>: <span class="kw">center</span>;
+  <span class="kw">background-size</span>: <span class="kw">cover</span>;
+}</code></pre>
+  </div>
+
+  <div class="card">
+    <h3>6. Linear gradient</h3>
+    <p>Colors blend along a straight line. You can specify a direction (angle or to-side) and any number of color stops.</p>
+    <div class="gradient-box" style="background:linear-gradient(90deg,#ff5733,#ffc300);"></div>
+    <pre><code><span class="kw">background</span>: <span class="kw">linear-gradient</span>(<span class="num">90deg</span>, <span class="str">#ff5733</span>, <span class="str">#ffc300</span>);
+<span class="kw">background</span>: <span class="kw">linear-gradient</span>(<span class="kw">to bottom</span>, <span class="str">#0f766e</span>, <span class="str">#115e59</span>);</code></pre>
+  </div>
+
+  <div class="card">
+    <h3>7. Radial gradient</h3>
+    <p>Colors spread outward from a center point, like ripples in water.</p>
+    <div class="gradient-box" style="background:radial-gradient(circle,#fff,#0f766e);"></div>
+    <pre><code><span class="kw">background</span>: <span class="kw">radial-gradient</span>(<span class="kw">circle</span>, <span class="str">#fff</span>, <span class="str">#0f766e</span>);
+<span class="kw">background</span>: <span class="kw">radial-gradient</span>(<span class="str">#ffc300</span>, <span class="str">#ff5733</span>);</code></pre>
+  </div>
+
+  <div class="tip">
+    <strong>Did you know?</strong> You can also make gradients <em>repeating</em> with <code>repeating-linear-gradient()</code>, and you can layer multiple backgrounds by separating them with commas, e.g. <code>background: linear-gradient(...), url(...)</code>.
+  </div>
+
+  <!-- 4. EXAMPLE PROGRAMS -->
+  <h2><span class="num">4</span>Example Programs with Explanation</h2>
+
+  <!-- Example 1 -->
+  <h3>Example 1 — Using all four color notations</h3>
+  <p>This example uses a named color, a hex color, an rgb color, and an hsl color — one for each of four elements — so you can compare them side by side. All four produce visible colors on the page.</p>
+
+  <pre><code><span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="val">"en"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+  <span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="val">"UTF-8"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;style&gt;</span>
+    <span class="comment">/* A named color */</span>
+    <span class="kw">p.named</span> { <span class="kw">color</span>: <span class="str">teal</span>; }
+
+    <span class="comment">/* A hex color */</span>
+    <span class="kw">p.hex</span> { <span class="kw">color</span>: <span class="str">#ff5733</span>; }
+
+    <span class="comment">/* An rgb color (with faint background) */</span>
+    <span class="kw">p.rgb</span> { <span class="kw">color</span>: <span class="kw">rgb</span>(<span class="num">15</span>, <span class="num">118</span>, <span class="num">110</span>); }
+
+    <span class="comment">/* An hsl color (with faint background) */</span>
+    <span class="kw">p.hsl</span> { <span class="kw">color</span>: <span class="kw">hsl</span>(<span class="num">9</span>, <span class="num">100%</span>, <span class="num">58%</span>); }
+  <span class="tag">&lt;/style&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+  <span class="tag">&lt;p</span> <span class="attr">class</span>=<span class="val">"named"</span><span class="tag">&gt;</span>This is <span class="kw">named color</span>: teal<span class="tag">&lt;/p&gt;</span>
+  <span class="tag">&lt;p</span> <span class="attr">class</span>=<span class="val">"hex"</span><span class="tag">&gt;</span>This is <span class="kw">hex color</span>: #ff5733<span class="tag">&lt;/p&gt;</span>
+  <span class="tag">&lt;p</span> <span class="attr">class</span>=<span class="val">"rgb"</span><span class="tag">&gt;</span>This is <span class="kw">rgb</span>: rgb(15, 118, 110)<span class="tag">&lt;/p&gt;</span>
+  <span class="tag">&lt;p</span> <span class="attr">class</span>=<span class="val">"hsl"</span><span class="tag">&gt;</span>This is <span class="kw">hsl</span>: hsl(9, 100%, 58%)<span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></code></pre>
+
+  <div class="card">
+    <strong>Explanation of Example 1:</strong>
+    <ul>
+      <li><code>teal</code> — uses a <strong>named</strong> color, easiest to read.</li>
+      <li><code>#ff5733</code> — uses a <strong>hex</strong> code, precise and common in design.</li>
+      <li><code>rgb(15, 118, 110)</code> — uses <strong>rgb()</strong> with numeric red/green/blue values.</li>
+      <li><code>hsl(9, 100%, 58%)</code> — uses <strong>hsl()</strong> with hue, saturation, and lightness.</li>
+      <li>All four are valid and produce a color; the difference is only in how you express it.</li>
+    </ul>
+  </div>
+
+  <!-- Example 2 -->
+  <h3>Example 2 — Background properties + linear &amp; radial gradients</h3>
+  <p>This example shows a hero section with a background image (simulated), then compares a linear gradient and a radial gradient side by side using the background shorthand.</p>
+
+  <pre><code><span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="val">"en"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+  <span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="val">"UTF-8"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;style&gt;</span>
+    <span class="comment">/* A hero with a background color + image, centered &amp; covered */</span>
+    <span class="kw">.hero</span> {
+      <span class="kw">background-color</span>: <span class="str">#0f766e</span>;
+      <span class="kw">background-image</span>: <span class="kw">url</span>(<span class="str">"banner.jpg"</span>);
+      <span class="kw">background-repeat</span>: <span class="kw">no-repeat</span>;
+      <span class="kw">background-position</span>: <span class="kw">center</span>;
+      <span class="kw">background-size</span>: <span class="kw">cover</span>;
+      <span class="kw">color</span>: <span class="str">white</span>; <span class="kw">padding</span>: <span class="num">40px</span>;
+    }
+
+    <span class="comment">/* A linear gradient box */</span>
+    <span class="kw">.linear</span> {
+      <span class="kw">background</span>: <span class="kw">linear-gradient</span>(<span class="num">90deg</span>, <span class="str">#ff5733</span>, <span class="str">#ffc300</span>);
+      <span class="kw">color</span>: <span class="str">white</span>; <span class="kw">padding</span>: <span class="num">30px</span>;
+    }
+
+    <span class="comment">/* A radial gradient box */</span>
+    <span class="kw">.radial</span> {
+      <span class="kw">background</span>: <span class="kw">radial-gradient</span>(<span class="kw">circle</span>, <span class="str">#ffc300</span>, <span class="str">#db2777</span>);
+      <span class="kw">color</span>: <span class="str">white</span>; <span class="kw">padding</span>: <span class="num">30px</span>;
+    }
+  <span class="tag">&lt;/style&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="val">"hero"</span><span class="tag">&gt;</span>Hero section with background image<span class="tag">&lt;/div&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="val">"linear"</span><span class="tag">&gt;</span>Linear gradient (left to right)<span class="tag">&lt;/div&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="val">"radial"</span><span class="tag">&gt;</span>Radial gradient (from center)<span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></code></pre>
+
+  <div class="card">
+    <strong>Explanation of Example 2:</strong>
+    <ul>
+      <li><code>.hero</code> uses separate <code>background-color</code>, <code>background-image</code>, <code>repeat</code>, <code>position</code>, and <code>size</code> properties (here the image is a placeholder — replace with a real image to see it).</li>
+      <li><code>.linear</code> uses <code>linear-gradient(90deg, ...)</code> — colors flow left to right.</li>
+      <li><code>.radial</code> uses <code>radial-gradient(circle, ...)</code> — colors spread out from the center in a circle.</li>
+      <li>The <code>background</code> shorthand lets you set color, image, repeat, position, and size all at once.</li>
+    </ul>
+    <div class="run-box">
+      <div class="label">How to try it</div>
+      Copy either example into a file named <code>index.html</code> and open it in a browser. In Example 2, you can drop any image named <code>banner.jpg</code> in the same folder to see the background-image property in action. Try changing the gradient angle or colors to see how easily they update.
+    </div>
+  </div>
+
+  <!-- 5. ADVANTAGES -->
+  <h2><span class="num">5</span>Advantages</h2>
+  <ul>
+    <li><strong>Flexibility &amp; precision:</strong> Multiple notations let you express colors exactly as you need them.</li>
+    <li><strong>Readability:</strong> Named colors and hsl make code easier to read and tweak.</li>
+    <li><strong>Consistency:</strong> Hex and rgb give exact, repeatable colors across your whole site.</li>
+    <li><strong>Rich backgrounds:</strong> Background properties let you place, repeat, and size backgrounds precisely.</li>
+    <li><strong>Professional look with gradients:</strong> Linear and radial gradients create smooth, attractive visuals without images.</li>
+    <li><strong>No extra assets:</strong> Gradients are pure CSS — fast, scalable, and responsive with no image files to load.</li>
+  </ul>
+
+  <!-- 6. CONCLUSION -->
+  <h2><span class="num">6</span>Conclusion</h2>
+  <p>
+    CSS color is built on four interchangeable notations — <strong>named</strong>, <strong>hex</strong>, <strong>rgb</strong>, and <strong>hsl</strong> — each letting you describe the same color a different way. With the <strong>background</strong> properties you can add color and images behind any element, and with <strong>linear</strong> and <strong>radial gradients</strong> you can blend colors into smooth, eye-catching designs.
+  </p>
+  <p>
+    In summary: <strong>pick the notation that reads best, control your backgrounds precisely, and use gradients to create depth and atmosphere without images.</strong> These tools give you full artistic control over how a page looks. As the saying goes: <em>"Color is the silent language of the web — learn to speak it fluently."</em>
+  </p>
+
+  <footer>Created with the Arena.ai Agent · CSS Colors, Backgrounds &amp; Gradients</footer>
+</div>
+</body>
+</html>

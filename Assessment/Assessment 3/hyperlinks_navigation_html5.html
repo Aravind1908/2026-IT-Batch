@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A detailed, beginner-friendly guide to hyperlinks and navigation in HTML5 — internal, external, email, anchor links, and the target attribute.">
+  <meta name="author" content="Arena.ai Agent">
+  <meta name="keywords" content="hyperlinks, HTML5 links, anchor tag, internal links, external links, mailto, target attribute, navigation">
+  <title>Hyperlinks &amp; Navigation in HTML5</title>
+  <style>
+    :root {
+      --ink: #1f2430;
+      --muted: #5b6270;
+      --accent: #0d9488;
+      --accent-soft: #e4f6f3;
+      --code-bg: #0f172a;
+      --code-ink: #e2e8f0;
+      --border: #e3e7ee;
+      --card: #ffffff;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color: var(--ink); background: #f6f8fb; line-height: 1.7; }
+    .wrap { max-width: 860px; margin: 0 auto; padding: 32px 20px 80px; }
+    header.hero { background: linear-gradient(135deg, #0d9488, #0f766e); color: #fff; border-radius: 16px; padding: 36px 28px; margin-bottom: 28px; }
+    header.hero h1 { margin: 0 0 8px; font-size: 1.9rem; }
+    header.hero p { margin: 0; opacity: 0.92; }
+    .badge { display: inline-block; background: rgba(255,255,255,0.18); border-radius: 999px; padding: 3px 12px; font-size: 0.8rem; margin-top: 14px; letter-spacing: 0.4px; }
+    h2 { font-size: 1.4rem; color: #0f766e; border-bottom: 2px solid var(--accent-soft); padding-bottom: 6px; margin-top: 42px; }
+    h2 .num { display: inline-block; width: 28px; height: 28px; line-height: 28px; text-align: center; background: var(--accent); color: #fff; border-radius: 50%; font-size: 0.9rem; margin-right: 10px; }
+    h3 { color: var(--ink); margin-top: 26px; font-size: 1.08rem; }
+    p { margin: 12px 0; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; margin: 18px 0; box-shadow: 0 1px 2px rgba(15,23,42,0.03); }
+    pre { background: var(--code-bg); color: var(--code-ink); border-radius: 10px; padding: 16px 18px; overflow-x: auto; font-size: 0.88rem; line-height: 1.55; margin: 14px 0; border-left: 4px solid var(--accent); }
+    code { font-family: "SF Mono", "Cascadia Code", Consolas, Menlo, monospace; }
+    p code, li code, td code { background: var(--accent-soft); color: #0f766e; padding: 2px 6px; border-radius: 5px; font-size: 0.88em; }
+    .comment { color: #7c8aa0; font-style: italic; }
+    .tag { color: #7dd3fc; }
+    .attr { color: #fbbf24; }
+    .val { color: #a5f3c4; }
+    table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.92rem; background: #fff; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+    th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    th { background: var(--accent-soft); color: #0f766e; }
+    tr:last-child td { border-bottom: none; }
+    ul, ol { padding-left: 22px; }
+    li { margin: 6px 0; }
+    .tip { background: #fff7e6; border-left: 4px solid #f59e0b; padding: 12px 16px; border-radius: 8px; margin: 16px 0; color: #7a4c00; }
+    .note { background: var(--accent-soft); border-left: 4px solid var(--accent); padding: 12px 16px; border-radius: 8px; margin: 16px 0; }
+    .run-box { border: 1px dashed var(--border); border-radius: 10px; padding: 12px 16px; margin-top: 10px; background: #fbfcfe; }
+    .run-box .label { font-size: 0.78rem; letter-spacing: 0.5px; text-transform: uppercase; color: var(--muted); }
+    footer { margin-top: 48px; text-align: center; color: var(--muted); font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <h1>Hyperlinks &amp; Navigation in HTML5</h1>
+    <p>A complete guide to the anchor tag — internal, external, email, and anchor links, plus the target attribute.</p>
+    <span class="badge">HTML5 · Links · Navigation</span>
+  </header>
+
+  <!-- 1. INTRODUCTION -->
+  <h2><span class="num">1</span>Introduction</h2>
+  <p>
+    The <strong>hyperlink</strong> is the single feature that makes the web a "web." It is what connects one page to another, letting a user click and jump from anywhere to anywhere. Without links, a website would just be a collection of isolated documents.
+  </p>
+  <p>
+    In HTML, a link is created with the <strong>anchor tag</strong>: <code>&lt;a&gt;</code> (short for "anchor"). You wrap the text or image that should be clickable between the opening and closing tags, and you set the destination using the <code>href</code> attribute. The basic syntax is:
+  </p>
+  <pre><code><span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"destination"</span><span class="tag">&gt;</span>Clickable text<span class="tag">&lt;/a&gt;</span></code></pre>
+  <p>
+    Depending on what you put in <code>href</code>, you can create several different kinds of links:
+  </p>
+  <ul>
+    <li><strong>Internal links</strong> — jump to another page on your <em>own</em> website.</li>
+    <li><strong>External links</strong> — jump to a page on a <em>different</em> website.</li>
+    <li><strong>Email links</strong> — open the visitor's email program with a message ready to send.</li>
+    <li><strong>Anchor links</strong> — jump to a specific section <em>within the same page</em>.</li>
+  </ul>
+  <p>You can also control <em>where</em> the link opens — in the same tab or a new one — using the <code>target</code> attribute.</p>
+
+  <!-- 2. SYNTAX -->
+  <h2><span class="num">2</span>Syntax and its Explanation</h2>
+  <p>The general structure of the anchor tag is:</p>
+  <pre><code><span class="tag">&lt;a</span>
+  <span class="attr">href</span>=<span class="val">"destination"</span>      <span class="comment">&lt;!-- WHERE to go --&gt;</span>
+  <span class="attr">target</span>=<span class="val">"_self"</span>              <span class="comment">&lt;!-- WHERE to open it --&gt;</span>
+  <span class="attr">title</span>=<span class="val">"tooltip text"</span>       <span class="comment">&lt;!-- extra info on hover --&gt;</span>
+<span class="tag">&gt;</span> Clickable text <span class="tag">&lt;/a&gt;</span></code></pre>
+
+  <h3>The most important attributes</h3>
+  <table>
+    <tr><th>Attribute</th><th>Purpose</th><th>Example</th></tr>
+    <tr><td><code>href</code></td><td>The destination URL (or path) the link goes to. This is the only required attribute.</td><td><code>href="page2.html"</code></td></tr>
+    <tr><td><code>target</code></td><td>Controls where the link opens (<code>_self</code>, <code>_blank</code>, <code>_parent</code>, <code>_top</code>).</td><td><code>target="_blank"</code></td></tr>
+    <tr><td><code>title</code></td><td>Shows a tooltip when the user hovers over the link.</td><td><code>title="Go to Google"</code></td></tr>
+    <tr><td><code>rel</code></td><td>Describes the relationship to the target (e.g. <code>nofollow</code>, <code>noopener</code>).</td><td><code>rel="noopener"</code></td></tr>
+  </table>
+
+  <h3>The four kinds of href</h3>
+  <table>
+    <tr><th>Type</th><th>Syntax</th><th>What it does</th></tr>
+    <tr><td>Internal</td><td><code>href="about.html"</code> or <code>href="page.html"</code></td><td>Links to a page on the same site.</td></tr>
+    <tr><td>External</td><td><code>href="https://example.com"</code></td><td>Links to a page on another site.</td></tr>
+    <tr><td>Email</td><td><code>href="mailto:<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ec828d8189ac89948d819c8089c28f8381">[email&#160;protected]</a>"</code></td><td>Opens the user's email app addressed to that address.</td></tr>
+    <tr><td>Anchor</td><td><code>href="#section-id"</code></td><td>Scrolls to an element with that <code>id</code> on the same page.</td></tr>
+  </table>
+
+  <div class="note">
+    <strong>Key rule:</strong> Every link needs a <code>href</code>. The <code>href</code> determines the <em>type</em> of link, while <code>target</code> determines <em>where</em> it opens. To use an anchor link, the destination element must have a matching <code>id</code> attribute.
+  </div>
+
+  <!-- 3. FEATURES & USES -->
+  <h2><span class="num">3</span>Features &amp; Uses</h2>
+  <p>Each type of link serves a different purpose. Let's look at them, one by one, with examples.</p>
+
+  <div class="card">
+    <h3>1. Internal links — navigating your own site</h3>
+    <p>These connect pages within your own website. They are the heart of site navigation (menus, footer links, "next" buttons).</p>
+    <pre><code><span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"index.html"</span><span class="tag">&gt;</span>Home<span class="tag">&lt;/a&gt;</span>
+<span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"about.html"</span><span class="tag">&gt;</span>About Us<span class="tag">&lt;/a&gt;</span></code></pre>
+  </div>
+
+  <div class="card">
+    <h3>2. External links — pointing to other sites</h3>
+    <p>These point to a full URL on another website. Use the complete protocol (<code>https://</code>) so the browser knows where to go.</p>
+    <pre><code><span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"https://www.w3.org"</span><span class="tag">&gt;</span>Visit W3C<span class="tag">&lt;/a&gt;</span></code></pre>
+  </div>
+
+  <div class="card">
+    <h3>3. Email links — ready-to-send messages</h3>
+    <p>Use the <code>mailto:</code> scheme. You can even pre-fill the <code>subject</code> and <code>body</code> by adding them after a question mark.</p>
+    <pre><code><span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"mailto:<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="87efe2ebebe8c7e2ffe6eaf7ebe2a9e4e8ea">[email&#160;protected]</a>"</span><span class="tag">&gt;</span>Email us<span class="tag">&lt;/a&gt;</span>
+<span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"mailto:<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c4aca1a8a8ab84a1bca5a9b4a8a1eaa7aba9">[email&#160;protected]</a>?subject=Hello&body=Hi there"</span><span class="tag">&gt;</span>Email with a subject<span class="tag">&lt;/a&gt;</span></code></pre>
+  </div>
+
+  <div class="card">
+    <h3>4. Anchor links — jump within the same page</h3>
+    <p>The <code>href</code> starts with a <code>#</code> and points to an element's <code>id</code>. This is great for "back to top" buttons, a table of contents, or section navigation.</p>
+    <pre><code><span class="comment">&lt;!-- The destination element needs an id --&gt;</span>
+<span class="tag">&lt;h2</span> <span class="attr">id</span>=<span class="val">"about"</span><span class="tag">&gt;</span>About<span class="tag">&lt;/h2&gt;</span>
+
+<span class="comment">&lt;!-- The link points to that id --&gt;</span>
+<span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"#about"</span><span class="tag">&gt;</span>Go to About<span class="tag">&lt;/a&gt;</span></code></pre>
+  </div>
+
+  <div class="card">
+    <h3>5. The target attribute — where the link opens</h3>
+    <p>The <code>target</code> attribute tells the browser where to display the linked page.</p>
+    <pre><code><span class="comment">&lt;!-- Default: opens in the same tab --&gt;</span>
+<span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"page.html"</span> <span class="attr">target</span>=<span class="val">"_self"</span><span class="tag">&gt;</span>Same tab<span class="tag">&lt;/a&gt;</span>
+
+<span class="comment">&lt;!-- Opens in a new tab/window --&gt;</span>
+<span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"https://example.com"</span> <span class="attr">target</span>=<span class="val">"_blank"</span><span class="tag">&gt;</span>New tab<span class="tag">&lt;/a&gt;</span></code></pre>
+  </div>
+
+  <div class="tip">
+    <strong>Did you know?</strong> When opening a link in a new tab (<code>target="_blank"</code>), it is good practice to add <code>rel="noopener"</code> — it prevents the new page from accessing the page you came from, keeping things more secure.
+  </div>
+
+  <!-- 4. EXAMPLE PROGRAMS -->
+  <h2><span class="num">4</span>Example Programs with Explanation</h2>
+
+  <!-- Example 1 -->
+  <h3>Example 1 — All four link types on one page (with anchor scrolling)</h3>
+  <p>This example puts together every type of link. It has a <code>&lt;nav&gt;</code> menu with internal and external links, an email link, and anchor links that scroll to sections on the same page.</p>
+
+  <pre><code><span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="val">"en"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+  <span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="val">"UTF-8"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;title&gt;</span>Link Examples<span class="tag">&lt;/title&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+
+  <span class="comment">&lt;!-- Anchor links: jump to section ids on THIS page --&gt;</span>
+  <span class="tag">&lt;nav&gt;</span>
+    <span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"#home"</span><span class="tag">&gt;</span>Home<span class="tag">&lt;/a&gt;</span> |
+    <span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"#about"</span><span class="tag">&gt;</span>About<span class="tag">&lt;/a&gt;</span> |
+    <span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"#contact"</span><span class="tag">&gt;</span>Contact<span class="tag">&lt;/a&gt;</span>
+  <span class="tag">&lt;/nav&gt;</span>
+
+  <span class="comment">&lt;!-- Internal link: another page on the same site --&gt;</span>
+  <span class="tag">&lt;p&gt;</span><span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"page2.html"</span><span class="tag">&gt;</span>Go to page 2 (internal)<span class="tag">&lt;/a&gt;</span><span class="tag">&lt;/p&gt;</span>
+
+  <span class="comment">&lt;!-- External link + opens in a new tab --&gt;</span>
+  <span class="tag">&lt;p&gt;</span><span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"https://www.google.com"</span> <span class="attr">target</span>=<span class="val">"_blank"</span> <span class="attr">rel</span>=<span class="val">"noopener"</span><span class="tag">&gt;</span>
+    Google (external, new tab)<span class="tag">&lt;/a&gt;</span><span class="tag">&lt;/p&gt;</span>
+
+  <span class="comment">&lt;!-- Email link --&gt;</span>
+  <span class="tag">&lt;p&gt;</span><span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"mailto:<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f39b969f9f9cb3968b929e839f96dd909c9e">[email&#160;protected]</a>?subject=Hello"</span><span class="tag">&gt;</span>
+    Email us (mailto)<span class="tag">&lt;/a&gt;</span><span class="tag">&lt;/p&gt;</span>
+
+  <span class="comment">&lt;!-- Sections for the anchor links to target --&gt;</span>
+  <span class="tag">&lt;h2</span> <span class="attr">id</span>=<span class="val">"home"</span><span class="tag">&gt;</span>Home<span class="tag">&lt;/h2&gt;</span>
+  <span class="tag">&lt;h2</span> <span class="attr">id</span>=<span class="val">"about"</span><span class="tag">&gt;</span>About<span class="tag">&lt;/h2&gt;</span>
+  <span class="tag">&lt;h2</span> <span class="attr">id</span>=<span class="val">"contact"</span><span class="tag">&gt;</span>Contact<span class="tag">&lt;/h2&gt;</span>
+
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></code></pre>
+
+  <div class="card">
+    <strong>Explanation of Example 1:</strong>
+    <ul>
+      <li><strong>Anchor links</strong> — the nav uses <code>#home</code>, <code>#about</code>, <code>#contact</code>, which scroll down to the matching <code>id</code> headings.</li>
+      <li><strong>Internal link</strong> — <code>href="page2.html"</code> points to another file on the same site.</li>
+      <li><strong>External link</strong> — points to a full <code>https://</code> URL, opens in a new tab via <code>target="_blank"</code>, and uses <code>rel="noopener"</code> for security.</li>
+      <li><strong>Email link</strong> — <code>mailto:</code> opens the visitor's email app, pre-filled with a subject.</li>
+    </ul>
+  </div>
+
+  <!-- Example 2 -->
+  <h3>Example 2 — A styled navigation bar with all link types</h3>
+  <p>This example shows a real site header: a horizontal navigation menu made of links, combining internal links, an external link, and an email link, all styled with a little CSS.</p>
+
+  <pre><code><span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="val">"en"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+  <span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="val">"UTF-8"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;style&gt;</span>
+    <span class="comment">/* Style the nav bar */</span>
+    <span class="kw">nav</span> { <span class="kw">background</span>: <span class="str">#333</span>; <span class="kw">padding</span>: <span class="num">10px</span>; }
+    <span class="kw">nav a</span> { <span class="kw">color</span>: <span class="str">white</span>; <span class="kw">margin-right</span>: <span class="num">15px</span>; <span class="kw">text-decoration</span>: <span class="kw">none</span>; }
+    <span class="kw">nav a:hover</span> { <span class="kw">color</span>: <span class="str">#0d9488</span>; }
+  <span class="tag">&lt;/style&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+
+  <span class="tag">&lt;nav&gt;</span>
+    <span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"index.html"</span><span class="tag">&gt;</span>Home<span class="tag">&lt;/a&gt;</span>          <span class="comment">&lt;!-- internal --&gt;</span>
+    <span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"products.html"</span><span class="tag">&gt;</span>Products<span class="tag">&lt;/a&gt;</span>   <span class="comment">&lt;!-- internal --&gt;</span>
+    <span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"#top"</span><span class="tag">&gt;</span>Back to Top<span class="tag">&lt;/a&gt;</span>     <span class="comment">&lt;!-- anchor --&gt;</span>
+    <span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"https://github.com"</span> <span class="attr">target</span>=<span class="val">"_blank"</span><span class="tag">&gt;</span>GitHub<span class="tag">&lt;/a&gt;</span>  <span class="comment">&lt;!-- external, new tab --&gt;</span>
+    <span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"mailto:<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c7b4b2b7b7a8b5b387a2bfa6aab7aba2e9a4a8aa">[email&#160;protected]</a>"</span><span class="tag">&gt;</span>Support<span class="tag">&lt;/a&gt;</span> <span class="comment">&lt;!-- email --&gt;</span>
+  <span class="tag">&lt;/nav&gt;</span>
+
+  <span class="tag">&lt;p</span> <span class="attr">id</span>=<span class="val">"top"</span><span class="tag">&gt;</span>Scroll down to see the page content, then click "Back to Top".<span class="tag">&lt;/p&gt;</span>
+
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></code></pre>
+
+  <div class="card">
+    <strong>Explanation of Example 2:</strong>
+    <ul>
+      <li>The <code>&lt;nav&gt;</code> element contains all the links, and CSS turns them into a clean horizontal menu.</li>
+      <li><code>index.html</code> and <code>products.html</code> are <strong>internal links</strong> to same-site pages.</li>
+      <li><code>#top</code> is an <strong>anchor link</strong> pointing to the <code>&lt;p id="top"&gt;</code> element further down the page.</li>
+      <li><code>https://github.com</code> is an <strong>external link</strong> that opens in a new tab.</li>
+      <li><code>mailto:<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d1a2a4a1a1bea3a591b4a9b0bca1bdb4ffb2bebc">[email&#160;protected]</a></code> is an <strong>email link</strong> that opens the visitor's mail app.</li>
+    </ul>
+    <div class="run-box">
+      <div class="label">How to try it</div>
+      Save Example 1 as <code>index.html</code> (and make a <code>page2.html</code> in the same folder for the internal link). Open it and click each link. For the anchor links, create enough content so the page scrolls; "Back to Top" will jump back up.
+    </div>
+  </div>
+
+  <!-- 5. ADVANTAGES -->
+  <h2><span class="num">5</span>Advantages</h2>
+  <ul>
+    <li><strong>Easy user navigation:</strong> Links let visitors move effortlessly between pages and sections.</li>
+    <li><strong>Great for SEO:</strong> Search engines follow links to discover and index your pages; a good link structure improves ranking.</li>
+    <li><strong>Multiple link types in one tag:</strong> The same <code>&lt;a&gt;</code> element handles internal, external, email, and anchor destinations.</li>
+    <li><strong>Control over the experience:</strong> The <code>target</code> attribute lets you open links in a new tab or the same tab as needed.</li>
+    <li><strong>Supports images &amp; other content:</strong> You can make an image clickable by wrapping it in an <code>&lt;a&gt;</code> tag.</li>
+    <li><strong>Accessible &amp; semantic:</strong> Links work with screen readers and keyboard navigation, and wrapping menus in <code>&lt;nav&gt;</code> adds meaning.</li>
+  </ul>
+
+  <!-- 6. CONCLUSION -->
+  <h2><span class="num">6</span>Conclusion</h2>
+  <p>
+    Hyperlinks are what turn separate pages into a connected web. The <code>&lt;a&gt;</code> anchor tag is the tool for creating them, and a single element gives you four kinds of links: internal links between the pages of your own site, external links to other websites, email links that open a message, and anchor links that scroll within the same page. The <code>target</code> attribute adds control over where each link opens.
+  </p>
+  <p>
+    In summary: <strong>use <code>href</code> to choose the destination, and <code>target</code> to choose where it opens.</strong> Combine them thoughtfully — a clear <code>&lt;nav&gt;</code> menu, informative link text, and <code>rel="noopener"</code> on new-tab links — and your site becomes easy to navigate, good for search engines, and pleasant to use. As the saying goes: <em>"Links are the glue of the web."</em>
+  </p>
+
+  <footer>Created with the Arena.ai Agent · Hyperlinks &amp; Navigation in HTML5</footer>
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v3d52b47920f24c319d37e2661827c42b1787588026925" integrity="sha512-d9sL6GJLXn6fInD1+TVXhTcQOsmxeHfmHAvwGDIxp5TO+uo1fiWW7mHomMj4MLRlCsJDTqXzWLHJFFlPCEIj/A==" data-cf-beacon='{"version":"2024.11.0","token":"1954b47c125f43f8b4338b3c4f804e4f"}' crossorigin="anonymous"></script>
+</body>
+</html>

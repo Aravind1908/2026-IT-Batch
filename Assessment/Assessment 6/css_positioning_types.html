@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A detailed, beginner-friendly guide to CSS positioning types — static, relative, absolute, fixed, sticky — with syntax and examples.">
+  <meta name="author" content="Arena.ai Agent">
+  <meta name="keywords" content="CSS positioning, static, relative, absolute, fixed, sticky, position property, top, left, z-index">
+  <title>Types of CSS Positioning</title>
+  <style>
+    :root { --ink:#1f2430; --muted:#5b6270; --accent:#b91c1c; --accent-soft:#fce7e7; --code-bg:#0f172a; --code-ink:#e2e8f0; --border:#e3e7ee; --card:#ffffff; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; color:var(--ink); background:#f6f8fb; line-height:1.7; }
+    .wrap { max-width:860px; margin:0 auto; padding:32px 20px 80px; }
+    header.hero { background:linear-gradient(135deg,#b91c1c,#7f1d1d); color:#fff; border-radius:16px; padding:36px 28px; margin-bottom:28px; }
+    header.hero h1 { margin:0 0 8px; font-size:1.9rem; }
+    header.hero p { margin:0; opacity:0.92; }
+    .badge { display:inline-block; background:rgba(255,255,255,0.18); border-radius:999px; padding:3px 12px; font-size:0.8rem; margin-top:14px; letter-spacing:0.4px; }
+    h2 { font-size:1.4rem; color:#7f1d1d; border-bottom:2px solid var(--accent-soft); padding-bottom:6px; margin-top:42px; }
+    h2 .num { display:inline-block; width:28px; height:28px; line-height:28px; text-align:center; background:var(--accent); color:#fff; border-radius:50%; font-size:0.9rem; margin-right:10px; }
+    h3 { color:var(--ink); margin-top:26px; font-size:1.08rem; }
+    p { margin:12px 0; }
+    .card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:18px 20px; margin:18px 0; box-shadow:0 1px 2px rgba(15,23,42,0.03); }
+    pre { background:var(--code-bg); color:var(--code-ink); border-radius:10px; padding:16px 18px; overflow-x:auto; font-size:0.88rem; line-height:1.55; margin:14px 0; border-left:4px solid var(--accent); }
+    code { font-family:"SF Mono","Cascadia Code",Consolas,Menlo,monospace; }
+    p code, li code, td code { background:var(--accent-soft); color:#7f1d1d; padding:2px 6px; border-radius:5px; font-size:0.88em; }
+    .comment { color:#7c8aa0; font-style:italic; }
+    .kw { color:#c084fc; }
+    .str { color:#a5f3c4; }
+    .num { color:#fca5a5; }
+    .sel { color:#7dd3fc; }
+    table { width:100%; border-collapse:collapse; margin:16px 0; font-size:0.92rem; background:#fff; border:1px solid var(--border); border-radius:10px; overflow:hidden; }
+    th,td { text-align:left; padding:10px 12px; border-bottom:1px solid var(--border); }
+    th { background:var(--accent-soft); color:#7f1d1d; }
+    tr:last-child td { border-bottom:none; }
+    ul,ol { padding-left:22px; }
+    li { margin:6px 0; }
+    .tip { background:#fff7e6; border-left:4px solid #f59e0b; padding:12px 16px; border-radius:8px; margin:16px 0; color:#7a4c00; }
+    .note { background:var(--accent-soft); border-left:4px solid var(--accent); padding:12px 16px; border-radius:8px; margin:16px 0; }
+    .run-box { border:1px dashed var(--border); border-radius:10px; padding:12px 16px; margin-top:10px; background:#fbfcfe; }
+    .run-box .label { font-size:0.78rem; letter-spacing:0.5px; text-transform:uppercase; color:var(--muted); }
+    .stage { background:#fff; border:1px solid var(--border); border-radius:8px; padding:16px; margin:14px 0; min-height:180px; position:relative; }
+    .stage .box { width:90px; height:50px; color:#fff; font-size:0.7rem; padding:6px; border-radius:4px; }
+    footer { margin-top:48px; text-align:center; color:var(--muted); font-size:0.85rem; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <h1>Types of CSS Positioning</h1>
+    <p>A complete guide to the five position values — static, relative, absolute, fixed, and sticky — with syntax and examples.</p>
+    <span class="badge">CSS · Layout · Positioning</span>
+  </header>
+
+  <!-- 1. INTRODUCTION -->
+  <h2><span class="num">1</span>Introduction</h2>
+  <p>
+    The <strong>position</strong> property is one of the most powerful layout tools in CSS. It controls where an element sits on the page, and — combined with the offset properties <code>top</code>, <code>right</code>, <code>bottom</code>, and <code>left</code> — it lets you place elements exactly where you want them, or even pull them out of the normal flow.
+  </p>
+  <p>
+    By default, elements are laid out in a "normal flow" — the browser stacks block elements on top of each other and flows inline elements left to right. The <code>position</code> property lets you change that. There are five values, each easier to understand by contrasting them:
+  </p>
+  <ul>
+    <li><strong>static</strong> — the default; the element stays exactly where normal flow puts it. Offsets have no effect.</li>
+    <li><strong>relative</strong> — still in normal flow (keeps its space), but can be nudged from where it would have been.</li>
+    <li><strong>absolute</strong> — removed from normal flow and positioned relative to its nearest positioned ancestor (or the page).</li>
+    <li><strong>fixed</strong> — removed from normal flow and positioned relative to the <em>viewport</em>, so it stays on screen even when scrolling.</li>
+    <li><strong>sticky</strong> — a hybrid; it behaves like <code>relative</code> until you scroll past a threshold, then behaves like <code>fixed</code>.</li>
+  </ul>
+
+  <!-- 2. SYNTAX -->
+  <h2><span class="num">2</span>Syntax and its Explanation</h2>
+  <p>The base syntax is simple — set <code>position</code> and optionally supply offsets:</p>
+  <pre><code><span class="kw">element</span> {
+  <span class="kw">position</span>: <span class="kw">value</span>;   <span class="comment">// static | relative | absolute | fixed | sticky</span>
+  <span class="kw">top</span>: <span class="num">value</span>;        <span class="comment">// optional offset</span>
+  <span class="kw">right</span>: <span class="num">value</span>;
+  <span class="kw">bottom</span>: <span class="num">value</span>;
+  <span class="kw">left</span>: <span class="num">value</span>;
+}</code></pre>
+
+  <table>
+    <tr><th>Position</th><th>Syntax</th><th>In normal flow?</th><th>Positioned relative to</th></tr>
+    <tr><td>Static</td><td><code>position: static</code></td><td>Yes</td><td>Normal flow (default). Offsets ignored.</td></tr>
+    <tr><td>Relative</td><td><code>position: relative</code></td><td>Yes (keeps its slot)</td><td>Its own original position; offsets shift it.</td></tr>
+    <tr><td>Absolute</td><td><code>position: absolute</code></td><td>No (removed)</td><td>Nearest positioned ancestor, else the page.</td></tr>
+    <tr><td>Fixed</td><td><code>position: fixed</code></td><td>No (removed)</td><td>The viewport (stays put while scrolling).</td></tr>
+    <tr><td>Sticky</td><td><code>position: sticky</code></td><td>Yes (until it sticks)</td><td>Scrolls normally, then sticks to viewport.</td></tr>
+  </table>
+
+  <div class="note">
+    <strong>Key rule:</strong> Offsets like <code>top</code>/<code>left</code> only take effect on <em>positioned</em> elements (anything except <code>static</code>). For <code>absolute</code> elements, the "reference" is the nearest ancestor that is itself positioned (has <code>position</code> other than <code>static</code>). For <code>fixed</code>, the reference is always the viewport.
+  </div>
+
+  <!-- 3. FEATURES & USES -->
+  <h2><span class="num">3</span>Features &amp; Uses</h2>
+
+  <div class="card">
+    <h3>1. static — the default</h3>
+    <p>Every element is <code>static</code> by default. It flows normally and ignores <code>top</code>/<code>left</code>. You rarely set this explicitly, but it's the baseline to compare others against.</p>
+    <pre><code><span class="kw">div</span> { <span class="kw">position</span>: <span class="kw">static</span>; }  <span class="comment">// default; no offsets work</span></code></pre>
+  </div>
+
+  <div class="card">
+    <h3>2. relative — nudge without affecting others</h3>
+    <p>The element keeps its place in the flow (other elements don't move), but you can shift it visually with offsets. It also becomes the "reference" for any absolutely-positioned children.</p>
+    <pre><code><span class="kw">.box</span> {
+  <span class="kw">position</span>: <span class="kw">relative</span>;
+  <span class="kw">top</span>: <span class="num">20px</span>;   <span class="comment">// moves down 20px from where it would be</span>
+  <span class="kw">left</span>: <span class="num">10px</span>;  <span class="comment">// moves right 10px</span>
+}</code></pre>
+  </div>
+
+  <div class="card">
+    <h3>3. absolute — place precisely within a parent</h3>
+    <p>The element is removed from flow and positioned relative to the nearest positioned ancestor (or the page if none). It no longer takes up space, letting you overlay content.</p>
+    <pre><code><span class="kw">.parent</span> { <span class="kw">position</span>: <span class="kw">relative</span>; }    <span class="comment">// sets the reference</span>
+<span class="kw">.child</span>  {
+  <span class="kw">position</span>: <span class="kw">absolute</span>;
+  <span class="kw">top</span>: <span class="num">0</span>; <span class="kw">left</span>: <span class="num">0</span>; <span class="comment">// pinned to parent's top-left</span>
+}</code></pre>
+  </div>
+
+  <div class="card">
+    <h3>4. fixed — stay on screen</h3>
+    <p>The element is positioned relative to the <em>viewport</em> and does not move when you scroll. Ideal for fixed headers, nav bars, cookie banners, or "back to top" buttons.</p>
+    <pre><code><span class="kw">nav</span> {
+  <span class="kw">position</span>: <span class="kw">fixed</span>;
+  <span class="kw">top</span>: <span class="num">0</span>; <span class="kw">left</span>: <span class="num">0</span>;
+  <span class="kw">width</span>: <span class="num">100%</span>;   <span class="comment">// a full-width top bar</span>
+}</code></pre>
+  </div>
+
+  <div class="card">
+    <h3>5. sticky — stick while scrolling</h3>
+    <p>Behaves like <code>relative</code> until the element reaches a scroll threshold, then <code>fixed</code>-like. Great for sticky table headers, section headers, or toolbars.</p>
+    <pre><code><span class="kw">th</span> {
+  <span class="kw">position</span>: <span class="kw">sticky</span>;
+  <span class="kw">top</span>: <span class="num">0</span>;   <span class="comment">// sticks to the top once scrolled to</span>
+}</code></pre>
+  </div>
+
+  <div class="tip">
+    <strong>Did you know?</strong> When you use <code>absolute</code>/<code>fixed</code>/<code>sticky</code> and things overlap, you control which element sits on top with <code>z-index</code>. Higher <code>z-index</code> appears "above." (Only works on positioned elements.)
+  </div>
+
+  <!-- 4. EXAMPLE PROGRAMS -->
+  <h2><span class="num">4</span>Example Programs with Explanation</h2>
+
+  <!-- Example 1 -->
+  <h3>Example 1 — static, relative, and absolute together</h3>
+  <p>This example places a parent <code>.wrap</code> as <code>relative</code>, then puts normal-flow boxes (static), a nudged box (relative), and an overlaid box (absolute) inside it. This shows how the three interact.</p>
+
+  <pre><code><span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="val">"en"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+  <span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="val">"UTF-8"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;style&gt;</span>
+    <span class="comment">/* A positioned parent — reference for the absolute child */</span>
+    <span class="kw">.wrap</span> {
+      <span class="kw">position</span>: <span class="kw">relative</span>;
+      <span class="kw">width</span>: <span class="num">300px</span>; <span class="kw">height</span>: <span class="num">200px</span>;
+      <span class="kw">border</span>: <span class="num">2px</span> <span class="kw">solid</span> <span class="str">#b91c1c</span>;
+      <span class="kw">background</span>: <span class="str">#fce7e7</span>;
+    }
+
+    <span class="comment">/* static — normal flow, takes its space */</span>
+    <span class="kw">.static</span> { <span class="kw">position</span>: <span class="kw">static</span>; <span class="kw">background</span>: <span class="str">#fde68a</span>; <span class="kw">padding</span>: <span class="num">6px</span>; }
+
+    <span class="comment">/* relative — keeps its slot but shifts down 20px */</span>
+    <span class="kw">.relative</span> {
+      <span class="kw">position</span>: <span class="kw">relative</span>;
+      <span class="kw">top</span>: <span class="num">20px</span>; <span class="kw">left</span>: <span class="num">10px</span>;
+      <span class="kw">background</span>: <span class="str">#93c5fd</span>; <span class="kw">padding</span>: <span class="num">6px</span>;
+      <span class="kw">color</span>: <span class="kw">black</span>;
+    }
+
+    <span class="comment">/* absolute — removed from flow, pinned to wrap's top-right */</span>
+    <span class="kw">.absolute</span> {
+      <span class="kw">position</span>: <span class="kw">absolute</span>;
+      <span class="kw">top</span>: <span class="num">0</span>; <span class="kw">right</span>: <span class="num">0</span>;
+      <span class="kw">background</span>: <span class="str">#b91c1c</span>; <span class="kw">color</span>: <span class="str">white</span>; <span class="kw">padding</span>: <span class="num">6px</span>;
+    }
+  <span class="tag">&lt;/style&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="val">"wrap"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="val">"static"</span><span class="tag">&gt;</span>Static<span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="val">"relative"</span><span class="tag">&gt;</span>Relative<span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="val">"absolute"</span><span class="tag">&gt;</span>Absolute<span class="tag">&lt;/div&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></code></pre>
+
+  <div class="card">
+    <strong>Explanation of Example 1:</strong>
+    <ul>
+      <li><code>.wrap</code> with <code>position: relative</code> becomes the reference point for absolutely-positioned children.</li>
+      <li><code>.static</code> flows normally and stays in its natural place.</li>
+      <li><code>.relative</code> still occupies its normal slot but is nudged down 20px and right 10px.</li>
+      <li><code>.absolute</code> is pulled out of the flow and pinned to the top-right corner of <code>.wrap</code> (because <code>wrap</code> is its positioned ancestor).</li>
+    </ul>
+  </div>
+
+  <!-- Example 2 -->
+  <h3>Example 2 — fixed and sticky</h3>
+  <p>This example demonstrates a fixed header that stays at the top while scrolling, and a sticky heading that sticks once it reaches the top. Scroll the page to see them both behave.</p>
+
+  <pre><code><span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="val">"en"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+  <span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="val">"UTF-8"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;style&gt;</span>
+    <span class="comment">/* Fixed header — stays pinned to the top of the viewport */</span>
+    <span class="kw">header</span> {
+      <span class="kw">position</span>: <span class="kw">fixed</span>;
+      <span class="kw">top</span>: <span class="num">0</span>; <span class="kw">left</span>: <span class="num">0</span>;
+      <span class="kw">width</span>: <span class="num">100%</span>;
+      <span class="kw">background</span>: <span class="str">#b91c1c</span>; <span class="kw">color</span>: <span class="str">white</span>;
+      <span class="kw">padding</span>: <span class="num">12px</span>;
+    }
+
+    <span class="comment">/* Sticky heading — scrolls normally, then sticks at the top */</span>
+    <span class="kw">h2.sticky</span> {
+      <span class="kw">position</span>: <span class="kw">sticky</span>;
+      <span class="kw">top</span>: <span class="num">60px</span>;  <span class="comment">// sticks just below the fixed header</span>
+      <span class="kw">background</span>: <span class="str">#fce7e7</span>;
+      <span class="kw">padding</span>: <span class="num">8px</span>;
+    }
+
+    <span class="comment">/* Just some content to scroll through */</span>
+    <span class="kw">.content</span> { <span class="kw">padding</span>: <span class="num">80px</span> <span class="num">20px</span> <span class="num">200px</span>; }
+  <span class="tag">&lt;/style&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+  <span class="tag">&lt;header&gt;</span>Fixed Header (stays on screen)<span class="tag">&lt;/header&gt;</span>
+
+  <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="val">"content"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;h2</span> <span class="attr">class</span>=<span class="val">"sticky"</span><span class="tag">&gt;</span>Sticky Heading<span class="tag">&lt;/h2&gt;</span>
+    <span class="tag">&lt;p&gt;</span>Scroll down to see the sticky heading "stick" to the top, while
+    the fixed header stays put at the very top the whole time.<span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;p&gt;</span>More content to give the page length...<span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;p&gt;</span>Keep scrolling to notice the difference between fixed and sticky.<span class="tag">&lt;/p&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></code></pre>
+
+  <div class="card">
+    <strong>Explanation of Example 2:</strong>
+    <ul>
+      <li><code>header</code> with <code>position: fixed</code> is pinned to the top of the viewport and never scrolls away.</li>
+      <li><code>h2.sticky</code> with <code>position: sticky</code> scrolls with the page until it reaches <code>top: 60px</code>, then "sticks" there as you keep scrolling.</li>
+      <li><code>top: 60px</code> for the sticky heading positions it just below the fixed header so they don't overlap.</li>
+      <li>This is the classic pattern for a fixed navbar with a sticky section header.</li>
+    </ul>
+    <div class="run-box">
+      <div class="label">How to try it</div>
+      Copy either example into a file named <code>index.html</code> and open it in a browser. Example 1 shows layout positioning inside a parent; Example 2 needs you to <strong>scroll</strong> to see the fixed header stay put and the sticky heading catch up. Try changing the <code>top</code> values to see the effect.
+    </div>
+  </div>
+
+  <!-- 5. ADVANTAGES -->
+  <h2><span class="num">5</span>Advantages</h2>
+  <ul>
+    <li><strong>Precise control:</strong> Position elements exactly where you need them on the page.</li>
+    <li><strong>Overlay &amp; layering:</strong> Use <code>absolute</code> to overlay content, badges, or labels on top of images/cards.</li>
+    <li><strong>Persistent navigation:</strong> <code>fixed</code> keeps menus or action buttons always visible for a smoother UX.</li>
+    <li><strong>Better scrolling experience:</strong> <code>sticky</code> keeps important headers in view without removing them from flow.</li>
+    <li><strong>Reference system:</strong> Pairing <code>relative</code> parents with <code>absolute</code> children is the foundation of many layouts (e.g., profile pictures with badges).</li>
+    <li><strong>Interactive design:</strong> Offset properties plus <code>z-index</code> let you build rich, multi-layered designs.</li>
+  </ul>
+
+  <!-- 6. CONCLUSION -->
+  <h2><span class="num">6</span>Conclusion</h2>
+  <p>
+    CSS positioning gives you complete control over where elements sit. The <strong>static</strong> value is the default that flows normally; <strong>relative</strong> nudges an element while keeping its space; <strong>absolute</strong> removes it from the flow and places it relative to a positioned parent; <strong>fixed</strong> pins it to the viewport so it never scrolls away; and <strong>sticky</strong> combines both by scrolling normally until it "sticks."
+  </p>
+  <p>
+    In summary: <strong>use <code>relative</code> for the parent and small nudges, <code>absolute</code> for precise overlays, <code>fixed</code> for always-visible bars, and <code>sticky</code> for headers that should follow you.</strong> Understanding these five values, along with offsets and <code>z-index</code>, unlocks the full power of CSS layout. As the saying goes: <em>"Master positioning, and you can place anything anywhere."</em>
+  </p>
+
+  <footer>Created with the Arena.ai Agent · Types of CSS Positioning</footer>
+</div>
+</body>
+</html>

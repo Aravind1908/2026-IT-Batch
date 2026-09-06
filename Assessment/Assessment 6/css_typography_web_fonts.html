@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A detailed, beginner-friendly guide to CSS typography — font-family, font-size, font-weight, line-height, text-align — and the use of web fonts.">
+  <meta name="author" content="Arena.ai Agent">
+  <meta name="keywords" content="CSS typography, font-family, font-size, font-weight, line-height, text-align, web fonts, Google Fonts">
+  <title>CSS Typography &amp; Web Fonts</title>
+  <style>
+    :root { --ink:#1f2430; --muted:#5b6270; --accent:#4f46e5; --accent-soft:#e8e6fb; --code-bg:#0f172a; --code-ink:#e2e8f0; --border:#e3e7ee; --card:#ffffff; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; color:var(--ink); background:#f6f8fb; line-height:1.7; }
+    .wrap { max-width:860px; margin:0 auto; padding:32px 20px 80px; }
+    header.hero { background:linear-gradient(135deg,#4f46e5,#4338ca); color:#fff; border-radius:16px; padding:36px 28px; margin-bottom:28px; }
+    header.hero h1 { margin:0 0 8px; font-size:1.9rem; }
+    header.hero p { margin:0; opacity:0.92; }
+    .badge { display:inline-block; background:rgba(255,255,255,0.18); border-radius:999px; padding:3px 12px; font-size:0.8rem; margin-top:14px; letter-spacing:0.4px; }
+    h2 { font-size:1.4rem; color:#4338ca; border-bottom:2px solid var(--accent-soft); padding-bottom:6px; margin-top:42px; }
+    h2 .num { display:inline-block; width:28px; height:28px; line-height:28px; text-align:center; background:var(--accent); color:#fff; border-radius:50%; font-size:0.9rem; margin-right:10px; }
+    h3 { color:var(--ink); margin-top:26px; font-size:1.08rem; }
+    p { margin:12px 0; }
+    .card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:18px 20px; margin:18px 0; box-shadow:0 1px 2px rgba(15,23,42,0.03); }
+    pre { background:var(--code-bg); color:var(--code-ink); border-radius:10px; padding:16px 18px; overflow-x:auto; font-size:0.88rem; line-height:1.55; margin:14px 0; border-left:4px solid var(--accent); }
+    code { font-family:"SF Mono","Cascadia Code",Consolas,Menlo,monospace; }
+    p code, li code, td code { background:var(--accent-soft); color:#4338ca; padding:2px 6px; border-radius:5px; font-size:0.88em; }
+    .comment { color:#7c8aa0; font-style:italic; }
+    .kw { color:#c084fc; }
+    .str { color:#a5f3c4; }
+    .num { color:#fca5a5; }
+    table { width:100%; border-collapse:collapse; margin:16px 0; font-size:0.92rem; background:#fff; border:1px solid var(--border); border-radius:10px; overflow:hidden; }
+    th,td { text-align:left; padding:10px 12px; border-bottom:1px solid var(--border); }
+    th { background:var(--accent-soft); color:#4338ca; }
+    tr:last-child td { border-bottom:none; }
+    ul,ol { padding-left:22px; }
+    li { margin:6px 0; }
+    .tip { background:#fff7e6; border-left:4px solid #f59e0b; padding:12px 16px; border-radius:8px; margin:16px 0; color:#7a4c00; }
+    .note { background:var(--accent-soft); border-left:4px solid var(--accent); padding:12px 16px; border-radius:8px; margin:16px 0; }
+    .run-box { border:1px dashed var(--border); border-radius:10px; padding:12px 16px; margin-top:10px; background:#fbfcfe; }
+    .run-box .label { font-size:0.78rem; letter-spacing:0.5px; text-transform:uppercase; color:var(--muted); }
+    .demo-heading { margin:10px 0; }
+    footer { margin-top:48px; text-align:center; color:var(--muted); font-size:0.85rem; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <h1>CSS Typography &amp; Web Fonts</h1>
+    <p>Understanding font-family, font-size, font-weight, line-height, text-align — and how to use web fonts.</p>
+    <span class="badge">CSS · Typography · Fonts</span>
+  </header>
+
+  <!-- 1. INTRODUCTION -->
+  <h2><span class="num">1</span>Introduction</h2>
+  <p>
+    <strong>Typography</strong> is the art and technique of arranging text so that it is readable, attractive, and communicates the right tone. In CSS, typography is controlled by a set of font-related properties that let you choose the font family, its size and weight, the spacing between lines, and how text is aligned.
+  </p>
+  <p>
+    Good typography is essential for a good website. Even a page with beautiful colors and layout will feel poor if the text is hard to read. The core typography properties are:
+  </p>
+  <ul>
+    <li><strong>font-family</strong> — which typeface(s) to use.</li>
+    <li><strong>font-size</strong> — how big the text is.</li>
+    <li><strong>font-weight</strong> — how bold/thick the text is.</li>
+    <li><strong>line-height</strong> — the vertical space between lines.</li>
+    <li><strong>text-align</strong> — how text is lined up (left, center, right, justify).</li>
+  </ul>
+  <p>
+    By default, browsers use the fonts installed on the user's computer. But <strong>web fonts</strong> let you load a specific font from the internet (via the Google Fonts CDN, for example), so your page looks the same for every visitor, no matter what fonts their device has. This is what makes a site feel professional and consistent.
+  </p>
+
+  <!-- 2. SYNTAX -->
+  <h2><span class="num">2</span>Syntax and its Explanation</h2>
+  <p>Here are the five core typography properties with their syntax and typical values.</p>
+
+  <table>
+    <tr><th>Property</th><th>Syntax</th><th>Example</th><th>Values</th></tr>
+    <tr><td>font-family</td><td><code>font-family: name(s)</code></td><td><code>font-family: Arial, sans-serif</code></td><td>Comma-separated list of fonts; browser falls back to the next one.</td></tr>
+    <tr><td>font-size</td><td><code>font-size: value</code></td><td><code>font-size: 18px</code></td><td>px, em, rem, %, keywords (small, large).</td></tr>
+    <tr><td>font-weight</td><td><code>font-weight: value</code></td><td><code>font-weight: bold</code></td><td>normal/bold, or numbers 100–900.</td></tr>
+    <tr><td>line-height</td><td><code>line-height: value</code></td><td><code>line-height: 1.6</code></td><td>A number (no unit) or a length like 24px.</td></tr>
+    <tr><td>text-align</td><td><code>text-align: value</code></td><td><code>text-align: center</code></td><td>left, right, center, justify.</td></tr>
+  </table>
+
+  <h3>Example rule combining them</h3>
+  <pre><code><span class="kw">body</span> {
+  <span class="kw">font-family</span>: <span class="str">Arial</span>, <span class="kw">sans-serif</span>;
+  <span class="kw">font-size</span>: <span class="num">18px</span>;
+  <span class="kw">font-weight</span>: <span class="kw">normal</span>;
+  <span class="kw">line-height</span>: <span class="num">1.6</span>;
+  <span class="kw">text-align</span>: <span class="kw">left</span>;
+}</code></pre>
+
+  <div class="note">
+    <strong>Key rule:</strong> Always end a <code>font-family</code> list with a <strong>generic fallback</strong> — <code>sans-serif</code>, <code>serif</code>, or <code>monospace</code>. This way, if none of the named fonts are available, the browser still has a sensible typeface to use.
+  </div>
+
+  <!-- 3. FEATURES & USES -->
+  <h2><span class="num">3</span>Features &amp; Uses</h2>
+
+  <div class="card">
+    <h3>1. font-family — choosing the typeface</h3>
+    <p>Sets the font, with a fallback chain. Using a generic family at the end guarantees something will render.</p>
+    <pre><code><span class="kw">h1</span> { <span class="kw">font-family</span>: <span class="str">Georgia</span>, <span class="str">"Times New Roman"</span>, <span class="kw">serif</span>; }
+<span class="kw">p</span>  { <span class="kw">font-family</span>: <span class="str">Helvetica</span>, <span class="str">Arial</span>, <span class="kw">sans-serif</span>; }</code></pre>
+  </div>
+
+  <div class="card">
+    <h3>2. font-size — setting the size</h3>
+    <p>Common units: <code>px</code> (fixed), <code>rem</code> (relative to root, good for accessibility), and <code>em</code> (relative to parent).</p>
+    <pre><code><span class="kw">h1</span> { <span class="kw">font-size</span>: <span class="num">2rem</span>; }     <span class="comment">// 2x the root size</span>
+<span class="kw">p</span>  { <span class="kw">font-size</span>: <span class="num">16px</span>; }</code></pre>
+  </div>
+
+  <div class="card">
+    <h3>3. font-weight — thickness</h3>
+    <p>Use keywords or numeric values (100 = thin, 400 = normal, 700 = bold, 900 = black).</p>
+    <pre><code><span class="kw">h1</span> { <span class="kw">font-weight</span>: <span class="kw">bold</span>; }        <span class="comment">// 700</span>
+<span class="kw">strong</span> { <span class="kw">font-weight</span>: <span class="num">700</span>; }
+<span class="kw">.light</span> { <span class="kw">font-weight</span>: <span class="num">300</span>; }</code></pre>
+  </div>
+
+  <div class="card">
+    <h3>4. line-height — spacing between lines</h3>
+    <p>A ratio (e.g. 1.5) is most flexible and readable. This controls how "airy" or cramped the text feels.</p>
+    <pre><code><span class="kw">body</span> { <span class="kw">line-height</span>: <span class="num">1.6</span>; }   <span class="comment">// comfortable reading</span>
+<span class="kw">h1</span>   { <span class="kw">line-height</span>: <span class="num">1.2</span>; }   <span class="comment">// headings can be tighter</span></code></pre>
+  </div>
+
+  <div class="card">
+    <h3>5. text-align — alignment</h3>
+    <p>Aligns the inline/text content within its block container.</p>
+    <pre><code><span class="kw">.center</span> { <span class="kw">text-align</span>: <span class="kw">center</span>; }
+<span class="kw">.right</span>  { <span class="kw">text-align</span>: <span class="kw">right</span>; }
+<span class="kw">.just</span>   { <span class="kw">text-align</span>: <span class="kw">justify</span>; }</code></pre>
+  </div>
+
+  <div class="card">
+    <h3>6. Web fonts — using fonts from the internet</h3>
+    <p>A web font is loaded over the network using <code>@font-face</code> or, more simply, by importing from Google Fonts. Let's see the <code>@font-face</code> approach and the Google Fonts link method.</p>
+    <pre><code><span class="comment">/* Method A: @font-face (load your own font file) */</span>
+<span class="kw">@font-face</span> {
+  <span class="kw">font-family</span>: <span class="str">"MyFont"</span>;
+  <span class="kw">src</span>: <span class="kw">url</span>(<span class="str">"myfont.woff2"</span>) <span class="kw">format</span>(<span class="str">"woff2"</span>);
+}
+<span class="kw">body</span> { <span class="kw">font-family</span>: <span class="str">"MyFont"</span>, <span class="kw">sans-serif</span>; }
+
+<span class="comment">/* Method B: Google Fonts (link in the &lt;head&gt;) — easiest */</span>
+<span class="comment">/* &lt;link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"&gt; */</span>
+<span class="kw">body</span> { <span class="kw">font-family</span>: <span class="str">"Roboto"</span>, <span class="kw">sans-serif</span>; }</code></pre>
+  </div>
+
+  <div class="tip">
+    <strong>Did you know?</strong> Since 2019, the default font stack of the "system" (like <code>system-ui</code>) uses the operating system's own fonts, which makes text load instantly and look native. It's a popular choice for modern websites.
+  </div>
+
+  <!-- 4. EXAMPLE PROGRAMS -->
+  <h2><span class="num">4</span>Example Programs with Explanation</h2>
+
+  <!-- Example 1 -->
+  <h3>Example 1 — All five typography properties in one page</h3>
+  <p>This example applies font-family, font-size, font-weight, line-height, and text-align to different elements, so you can see each one in action.</p>
+
+  <pre><code><span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="val">"en"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+  <span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="val">"UTF-8"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;style&gt;</span>
+    <span class="comment">/* font-family + line-height on the whole page */</span>
+    <span class="kw">body</span> {
+      <span class="kw">font-family</span>: <span class="str">Georgia</span>, <span class="kw">serif</span>;
+      <span class="kw">line-height</span>: <span class="num">1.6</span>;
+    }
+
+    <span class="comment">/* font-size + font-weight on the heading */</span>
+    <span class="kw">h1</span> {
+      <span class="kw">font-size</span>: <span class="num">2rem</span>;
+      <span class="kw">font-weight</span>: <span class="kw">bold</span>;
+      <span class="kw">text-align</span>: <span class="kw">center</span>;
+    }
+
+    <span class="comment">/* A lighter-weight paragraph, right aligned */</span>
+    <span class="kw">.note</span> {
+      <span class="kw">font-weight</span>: <span class="num">300</span>;
+      <span class="kw">font-size</span>: <span class="num">0.9em</span>;
+      <span class="kw">text-align</span>: <span class="kw">right</span>;
+    }
+  <span class="tag">&lt;/style&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+  <span class="tag">&lt;h1&gt;</span>Typography in CSS<span class="tag">&lt;/h1&gt;</span>
+  <span class="tag">&lt;p&gt;</span>This paragraph uses the body's font (Georgia) and a comfortable
+  line-height, making the text easy to read across several lines.<span class="tag">&lt;/p&gt;</span>
+  <span class="tag">&lt;p</span> <span class="attr">class</span>=<span class="val">"note"</span><span class="tag">&gt;</span>A smaller, right-aligned note.<span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></code></pre>
+
+  <div class="card">
+    <strong>Explanation of Example 1:</strong>
+    <ul>
+      <li><code>font-family: Georgia, serif</code> — applies the Georgia serif font, falling back to a generic serif.</li>
+      <li><code>line-height: 1.6</code> — gives comfortable spacing between lines of the paragraph.</li>
+      <li><code>h1</code> — <code>font-size: 2rem</code> makes it large, <code>font-weight: bold</code> makes it thick, and <code>text-align: center</code> centers it.</li>
+      <li><code>.note</code> — lighter weight (300), smaller size (0.9em), and right-aligned.</li>
+    </ul>
+  </div>
+
+  <!-- Example 2 -->
+  <h3>Example 2 — Using a web font from Google Fonts</h3>
+  <p>This example loads the popular "Roboto" font from Google Fonts and applies it to the page, so the text uses a specific web font rather than a system font. (You'll need an internet connection for the font to load.)</p>
+
+  <pre><code><span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="val">"en"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+  <span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="val">"UTF-8"</span><span class="tag">&gt;</span>
+
+  <span class="comment">&lt;!-- Load the Roboto web font from Google Fonts --&gt;</span>
+  <span class="tag">&lt;link</span> <span class="attr">href</span>=<span class="val">"https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"</span> <span class="attr">rel</span>=<span class="val">"stylesheet"</span><span class="tag">&gt;</span>
+
+  <span class="tag">&lt;style&gt;</span>
+    <span class="comment">/* Use the loaded web font */</span>
+    <span class="kw">body</span> { <span class="kw">font-family</span>: <span class="str">"Roboto"</span>, <span class="kw">sans-serif</span>; }
+    <span class="kw">h1</span>   { <span class="kw">font-weight</span>: <span class="num">700</span>; }
+  <span class="tag">&lt;/style&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+  <span class="tag">&lt;h1&gt;</span>Hello, Web Fonts!<span class="tag">&lt;/h1&gt;</span>
+  <span class="tag">&lt;p&gt;</span>This text is rendered in the Roboto web font.<span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></code></pre>
+
+  <div class="card">
+    <strong>Explanation of Example 2:</strong>
+    <ul>
+      <li>The <code>&lt;link&gt;</code> tag loads the font CSS from Google Fonts (weight 400 and 700).</li>
+      <li><code>font-family: "Roboto", sans-serif</code> tells the browser to use Roboto, falling back to a generic sans-serif if it can't load.</li>
+      <li>Because Roboto is a web font, the same text look is guaranteed on every device, regardless of its installed fonts.</li>
+    </ul>
+    <div class="run-box">
+      <div class="label">How to try it</div>
+      Copy either example into a file named <code>index.html</code> and open it in a browser. Example 2 needs an internet connection to download Roboto — try removing the <code>&lt;link&gt;</code> line and you'll see it fall back to a plain sans-serif font instead. To load fonts locally, you'd use <code>@font-face</code> with your own <code>.woff2</code> files.
+    </div>
+  </div>
+
+  <!-- 5. ADVANTAGES -->
+  <h2><span class="num">5</span>Advantages</h2>
+  <ul>
+    <li><strong>Better readability:</strong> Good font choice, size, and line-height make text comfortable to read.</li>
+    <li><strong>Professional look:</strong> Web fonts give a consistent, polished appearance across all devices.</li>
+    <li><strong>Brand consistency:</strong> Using a font stack or a web font keeps typography consistent everywhere.</li>
+    <li><strong>Improved accessibility:</strong> Using <code>rem</code> units and sensible sizes respect user zoom and readability settings.</li>
+    <li><strong>Control over hierarchy:</strong> <code>font-weight</code> and <code>font-size</code> help establish a clear visual hierarchy (headings vs. body).</li>
+    <li><strong>No images needed:</strong> Text is real, searchable, and selectable — far better than images for headings.</li>
+  </ul>
+
+  <!-- 6. CONCLUSION -->
+  <h2><span class="num">6</span>Conclusion</h2>
+  <p>
+    CSS typography is about making text readable, clear, and attractive. The core properties — <strong>font-family</strong>, <strong>font-size</strong>, <strong>font-weight</strong>, <strong>line-height</strong>, and <strong>text-align</strong> — give you full control over how text looks and feels. And with <strong>web fonts</strong>, you can use any typeface you like, loaded from the internet, so your design is identical everywhere.
+  </p>
+  <p>
+    In summary: <strong>choose a clear font, size it appropriately, keep comfortable line spacing, and set alignment to suit the content.</strong> For a consistent brand look, pair a system-font fallback stack with a web font like Google Fonts. Typography is subtle, but it's one of the strongest signals of a well-made site. As the saying goes: <em>"Typography is the craft of endowing human language with a durable visual form."</em>
+  </p>
+
+  <footer>Created with the Arena.ai Agent · CSS Typography &amp; Web Fonts</footer>
+</div>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v3d52b47920f24c319d37e2661827c42b1787588026925" integrity="sha512-d9sL6GJLXn6fInD1+TVXhTcQOsmxeHfmHAvwGDIxp5TO+uo1fiWW7mHomMj4MLRlCsJDTqXzWLHJFFlPCEIj/A==" data-cf-beacon='{"version":"2024.11.0","token":"1954b47c125f43f8b4338b3c4f804e4f"}' crossorigin="anonymous"></script>
+</body>
+</html>
