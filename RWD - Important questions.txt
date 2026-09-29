@@ -1,0 +1,100 @@
+Responsive web design  -- Important Questions
+
+unit 1 HTML
+-------------------------
+1.What is HTML5 <!DOCTYPE html> declaration. compare the syntax with html4.
+2. Explain sematic tags. what is <section> and <article> ?
+3. what are <meta> and <title> tags? how they are useful for SEO
+4. what is href attribute?. Explain it's uses? 
+5.what is src attribute?Explain it's uses? 
+6. What is rowspan and colspan?
+7. What is form validation in HTML? Explain any 5 methods of automatic form validation.
+8. What is the difference between picture and image tags
+9. What is Emmet? expalin any two basic emmet abbreviations.
+10. How will you locate broke images and review form validation errors using browser dev tools
+11. What are the advantages of using semantic tags
+12. Create an event registration form.
+13. Create a class timetable using tables
+14. Which meta tags are used in SEO. Explain
+15. How audio and video tags are implemented in HTML5
+16. What is relative hyperlink and uniform nav?. Explain how it maintains consistency.
+17. Explain the usage of browserdev tools in front end auditing.
+
+Unit II CSS
+------------------------------------------
+1. What is a selector in CSS. different types of selectors with examples.
+2. What is content-box and border-box?
+3. what is the difference between justify-content and align-itemsin flexbox layout.
+4. Explain about linear-gradiant and radial-gradiant with examples.
+5. Explain with examples about the usage of grid-template in creating a header, side-bar and footer.
+6. What is CSS. Explain its important with suitable examples
+7. What is flex-box. Explain in detail.
+8. discuss about flex-box and grid layout. compare
+9. Create a responsive admin dashboard
+10. explain each property in styling the text content.
+
+Unit III - tailwindCSS
+--------------------------------------
+1. What is tailwind. explain the utility first approachwith suitable examples.
+2. How to setup tailwind using CDN, CLI and POSTCSS
+3. EXplain the differences between tailwindCSS andBootstrap.
+4. Which utilitiesin tailwindCSS are used for spacing, sizing, colors, and typography. Give examples for each.
+5. Explain flexbox and grid layout in tailwindCSS
+6. What is responsive prefix Explain with examples about sm:, md:, lg: and xl:
+7. Explain the state variants hover, focus, active and dark in tailwind CSS with examples.
+8. What is tailwind.config.js? how to configure custom colors and fonts.
+9. Explain the steps  to create resuable components styles using @apply directive.
+10. Explain about typography plugins in detail with examples.
+11. Explain headless UI
+12. Devlope a webpage that uses hover: , focus:, active:, dark: state variants.
+13. Create a webpage that used custom brand colors and fonts.
+14. Create a reusable button and card. Style these using tailwindCSS
+15. Explain collapsible sidebar, statistical cards and a data tablewith suitable example. 
+
+Unit IV  Git and GitHub
+-----------------------------------
+1. what is version control? What are the advantages of using version control?
+2. Explain the following Git commands a) git init, b) git add, c) git commit, d) git status and e) git log. Give examples .
+3. What is a branch in Git. explain how to create and switch branches.
+4.  How to merge two  Git branches. Explain with examples.
+5. What is  merge conflict? Explain with suitable example.
+6. What is pull request and fork?Explain with examples.
+7. Explain in details the concept of Gitignore. Give examples.
+8. How will you create headings, lists, code blocks, tables and links. Explain with examples.
+9. Explain about GitHub flavoured markdown.
+10. Describe the important components of a professional README.md, including badges, screenshots and contributing guidelines.
+11. Explain the difference between netlify and vercel  with regard  to GitHub based deployment.
+12.  Explain all the steps in Git workflow from creating a repostory to pushing chnges to GitHub.
+13. Explain git collaboration using Git repositories, forking , pull requests and .gitignore
+14. What is the difference between static web hosting and cloud-based deployment. 
+15. Create a README.md file for youy project.
+16. Explain the deployement features of netlify and vercel.
+17. How will you deploy and manage a SaaS dashboard using Git Flow.
+18. how will you deploy your projec in vvercel using GitHub Import. Explain the process in detail.
+
+Unit 5 CMS and WordPress
+---------------------------------------------------
+1. What is content Management System. Explain
+2. What are the  features of wordPress.
+3. Explain the differences between wordPress.org and wordPress.com.
+4. How to install wordPress using XAMPP
+5. What is the purpose of wp-config.php?
+6. What are the settings available in wordPress dashboard. Explain
+7. What are posts and pages in wordpress. Distingush with examples.
+8. Explain how to use blocks to create a web page using Gutenberg Block Editor .
+9. What is wordPress themes and Theme Customizer in wordPress.
+10. Explain about contact Form 7 and Yoast  SEO. 
+11. Explain about the security practices that can be used to protect a wordPress site. 
+12. Describe the different WordPress user roles and security mechanisms.
+13. Explain wordPress plugins
+14. Explain the SEO techniques used in Yoast SEO
+15. Explain WooCommerce and the WordPress REST API.
+16. Explain the steps in creating qa five page website using WordPress.
+
+
+
+
+
+
+
+
